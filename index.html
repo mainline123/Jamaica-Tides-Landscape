@@ -27,7 +27,6 @@ body{
   font-family:Arial,Helvetica,sans-serif;
 
   background:#063f5b;
-
   color:#ffffff;
 }
 
@@ -81,9 +80,7 @@ body{
 
 .title{
   font-size:5.5vh;
-
   line-height:.95;
-
   font-weight:900;
 }
 
@@ -91,7 +88,6 @@ body{
   margin-top:.6vh;
 
   font-size:3vh;
-
   font-weight:900;
 
   color:#f6c41f;
@@ -101,7 +97,6 @@ body{
   margin-top:1vh;
 
   font-size:1.7vh;
-
   font-weight:800;
 
   color:#d6e8f1;
@@ -109,9 +104,7 @@ body{
 
 .headerRight{
   display:flex;
-
   align-items:center;
-
   justify-content:flex-end;
 }
 
@@ -121,7 +114,6 @@ body{
 
 .clock{
   font-size:3.1vh;
-
   font-weight:900;
 }
 
@@ -177,7 +169,6 @@ body{
   display:inline-block;
 
   width:1.2vh;
-
   height:1.2vh;
 
   margin-right:.5vh;
@@ -294,7 +285,7 @@ body{
 
 .location{
   padding:
-    .65vh
+    .55vh
     .55vw;
 
   display:grid;
@@ -329,7 +320,7 @@ body{
 
 
 /* =========================
-   HIGH / LOW
+   HIGH / LOW STACKED
 ========================= */
 
 .tides{
@@ -337,15 +328,25 @@ body{
 
   display:grid;
 
-  grid-template-columns:
-    1fr
-    1fr;
+  grid-template-columns:1fr;
 
-  gap:.28vw;
+  grid-template-rows:
+    auto
+    auto;
+
+  gap:.55vh;
 }
 
 .tide{
-  font-size:1.32vh;
+  display:flex;
+
+  align-items:center;
+
+  width:100%;
+
+  font-size:1.5vh;
+
+  line-height:1.15;
 
   font-weight:900;
 
@@ -355,25 +356,31 @@ body{
 }
 
 .tag{
-  display:inline-block;
+  display:inline-flex;
 
-  min-width:2.55vw;
+  align-items:center;
 
-  margin-right:.18vw;
+  justify-content:center;
+
+  min-width:3.15vw;
+
+  margin-right:.38vw;
 
   padding:
-    .35vh
-    .24vw;
+    .34vh
+    .3vw;
 
   border-radius:999px;
 
-  text-align:center;
-
   color:#ffffff;
 
-  font-size:.9vh;
+  text-align:center;
+
+  font-size:.88vh;
 
   font-weight:900;
+
+  flex-shrink:0;
 }
 
 .high{
@@ -385,9 +392,9 @@ body{
 }
 
 .height{
-  margin-left:.15vw;
+  margin-left:.35vw;
 
-  font-size:1vh;
+  font-size:1.02vh;
 
   color:#607c8c;
 
@@ -557,7 +564,7 @@ const PLACES = [
 
 
 const CACHE_KEY =
-"jamaica_tides_landscape_large_v2";
+"jamaica_tides_landscape_stacked_v3";
 
 
 /* =========================================================
@@ -1125,11 +1132,9 @@ function draw(
             place
           ] = {
 
-            high:
-            null,
+            high:null,
 
-            low:
-            null
+            low:null
 
           };
 
@@ -1461,7 +1466,7 @@ function draw(
 
 
 /* =========================================================
-   LOAD SAVED DATA IMMEDIATELY
+   LOAD SAVED DATA
 ========================================================= */
 
 function loadSaved(){
