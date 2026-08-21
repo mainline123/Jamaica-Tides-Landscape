@@ -1,0 +1,1810 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+
+<title>Jamaica Tides Landscape</title>
+
+<style>
+
+*{
+  box-sizing:border-box;
+}
+
+html,
+body{
+  margin:0;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#063f5b;
+  color:#ffffff;
+}
+
+.page{
+  width:100vw;
+  height:100vh;
+
+  display:grid;
+
+  grid-template-rows:
+  15%
+  7%
+  1fr
+  4%;
+
+  background:
+  linear-gradient(
+    180deg,
+    #075579 0%,
+    #063f5b 100%
+  );
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.header{
+
+  padding:
+  2vh
+  3vw
+  1vh;
+
+  border-bottom:
+  .45vh solid #f6c41f;
+
+  display:grid;
+
+  grid-template-columns:
+  1fr
+  auto;
+
+  align-items:center;
+
+  gap:3vw;
+}
+
+
+.title{
+
+  font-size:5.1vh;
+
+  line-height:.95;
+
+  font-weight:900;
+}
+
+
+.subtitle{
+
+  margin-top:.7vh;
+
+  font-size:2.7vh;
+
+  font-weight:900;
+
+  color:#f6c41f;
+}
+
+
+.range{
+
+  margin-top:1vh;
+
+  font-size:1.45vh;
+
+  font-weight:700;
+
+  color:#d6e8f1;
+}
+
+
+.headerRight{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:2vw;
+}
+
+
+.returnBox{
+
+  min-width:18vw;
+
+  min-height:8vh;
+
+  padding:
+  1.2vh
+  1.8vw;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  background:#078147;
+
+  color:white;
+
+  border:
+  .35vh solid #f6c41f;
+
+  border-radius:1.3vh;
+
+  font-size:2.1vh;
+
+  line-height:1.1;
+
+  font-weight:900;
+
+  text-align:center;
+
+  box-shadow:
+  0 .5vh 1.2vh rgba(0,0,0,.3);
+}
+
+
+.clockBox{
+
+  text-align:right;
+}
+
+
+.clock{
+
+  font-size:2.6vh;
+
+  font-weight:900;
+}
+
+
+.clockLabel{
+
+  margin-top:.4vh;
+
+  font-size:1.05vh;
+
+  color:#f6c41f;
+
+  font-weight:900;
+}
+
+
+/* =========================
+   GREEN BAR
+========================= */
+
+.greenBar{
+
+  margin:
+  .8vh
+  2vw
+  0;
+
+  padding:
+  0
+  2vw;
+
+  background:#078147;
+
+  border-radius:
+  1vh
+  1vh
+  0
+  0;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  font-size:2.25vh;
+
+  font-weight:900;
+}
+
+
+.status{
+
+  font-size:1.65vh;
+}
+
+
+.dot{
+
+  display:inline-block;
+
+  width:1.1vh;
+
+  height:1.1vh;
+
+  margin-right:.5vh;
+
+  border-radius:50%;
+
+  background:#55db66;
+}
+
+
+/* =========================
+   7 DAY BOARD
+========================= */
+
+.board{
+
+  margin:
+  0
+  2vw;
+
+  display:grid;
+
+  grid-template-columns:
+  repeat(7,1fr);
+
+  gap:.45vw;
+
+  min-height:0;
+
+  overflow:hidden;
+}
+
+
+.dayCard{
+
+  min-width:0;
+
+  background:#ffffff;
+
+  color:#064b71;
+
+  display:grid;
+
+  grid-template-rows:
+  16%
+  1fr;
+
+  border-radius:
+  0
+  0
+  .8vh
+  .8vh;
+
+  overflow:hidden;
+
+  box-shadow:
+  0 .25vh .7vh rgba(0,0,0,.18);
+}
+
+
+.dayHeader{
+
+  background:#d8ebf5;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  flex-direction:column;
+
+  text-align:center;
+
+  border-bottom:
+  .2vh solid #b9d1dd;
+}
+
+
+.dow{
+
+  font-size:2.8vh;
+
+  font-weight:900;
+}
+
+
+.date{
+
+  margin-top:.25vh;
+
+  font-size:1.45vh;
+
+  font-weight:800;
+}
+
+
+.locations{
+
+  display:grid;
+
+  grid-template-rows:
+  repeat(5,1fr);
+
+  min-height:0;
+}
+
+
+.location{
+
+  padding:
+  .7vh
+  .55vw;
+
+  display:grid;
+
+  grid-template-rows:
+  auto
+  1fr;
+
+  align-items:center;
+
+  border-bottom:
+  .1vh solid #dce7ec;
+
+  min-height:0;
+}
+
+
+.place{
+
+  font-size:1.2vh;
+
+  line-height:1.05;
+
+  font-weight:900;
+
+  color:#07547f;
+
+  white-space:nowrap;
+
+  overflow:hidden;
+
+  text-overflow:ellipsis;
+}
+
+
+.tides{
+
+  margin-top:.4vh;
+
+  display:grid;
+
+  grid-template-columns:
+  1fr
+  1fr;
+
+  gap:.35vw;
+}
+
+
+.tide{
+
+  font-size:1.02vh;
+
+  font-weight:900;
+
+  color:#063f61;
+
+  white-space:nowrap;
+}
+
+
+.tag{
+
+  display:inline-block;
+
+  min-width:2.5vw;
+
+  margin-right:.15vw;
+
+  padding:
+  .27vh
+  .25vw;
+
+  border-radius:999px;
+
+  text-align:center;
+
+  color:white;
+
+  font-size:.75vh;
+
+  font-weight:900;
+}
+
+
+.high{
+  background:#078147;
+}
+
+
+.low{
+  background:#147eae;
+}
+
+
+.height{
+
+  margin-left:.15vw;
+
+  font-size:.78vh;
+
+  color:#607c8c;
+
+  font-weight:700;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+
+  padding:
+  0
+  2vw;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  font-size:.9vh;
+
+  color:#bad0dc;
+}
+
+
+.footerRight{
+
+  color:#f6c41f;
+
+  font-weight:800;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="page">
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header class="header">
+
+<div>
+
+  <div class="title">
+    JAMAICA TIDES
+  </div>
+
+  <div class="subtitle">
+    7-DAY OUTLOOK
+  </div>
+
+  <div
+  id="range"
+  class="range">
+    Loading 7-day outlook...
+  </div>
+
+</div>
+
+
+<div class="headerRight">
+
+
+  <!-- DISPLAY ONLY
+       NOVISIGN WILL HANDLE TOUCH -->
+
+  <div class="returnBox">
+    ← RETURN TO<br>
+    DIRECTORY
+  </div>
+
+
+  <div class="clockBox">
+
+    <div
+    id="clock"
+    class="clock">
+      --:--
+    </div>
+
+    <div class="clockLabel">
+      JAMAICA TIME
+    </div>
+
+  </div>
+
+
+</div>
+
+</header>
+
+
+<!-- =========================
+     GREEN BAR
+========================= -->
+
+<div class="greenBar">
+
+<span>
+HIGH &amp; LOW TIDES
+</span>
+
+<span
+id="status"
+class="status">
+
+<span class="dot"></span>
+
+LOADING LIVE DATA
+
+</span>
+
+</div>
+
+
+<!-- =========================
+     7 DAY BOARD
+========================= -->
+
+<main
+id="board"
+class="board">
+</main>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer class="footer">
+
+<div>
+JAMAICA • LIVE 7-DAY TIDE OUTLOOK
+</div>
+
+<div class="footerRight">
+MONTEGO BAY • OCHO RIOS • NEGRIL • KINGSTON / PORT ROYAL • PORT ANTONIO
+</div>
+
+</footer>
+
+
+</div>
+
+
+
+<script>
+
+/* =========================================================
+   SAME WORKING TIDE FEED
+========================================================= */
+
+const FEED_URL =
+"https://script.google.com/macros/s/AKfycbwP66KnR7wD0BdmHhUQc4IboeLvOXd8UD2ODKO4_N5YkwCSmrV589cxoV4yp-QankOo/exec?feed=1";
+
+
+const PLACES = [
+
+  "Montego Bay",
+
+  "Ocho Rios",
+
+  "Negril",
+
+  "Kingston / Port Royal",
+
+  "Port Antonio"
+
+];
+
+
+const CACHE_KEY =
+"jamaica_tides_landscape_v1";
+
+
+/* =========================================================
+   JAMAICA CLOCK
+========================================================= */
+
+function jamaicaTime(){
+
+  return new Date()
+
+  .toLocaleTimeString(
+
+    "en-US",
+
+    {
+
+      timeZone:
+      "America/Jamaica",
+
+      hour:
+      "numeric",
+
+      minute:
+      "2-digit"
+
+    }
+
+  );
+
+}
+
+
+function updateClock(){
+
+  document
+  .getElementById(
+    "clock"
+  )
+  .textContent =
+  jamaicaTime();
+
+}
+
+
+/* =========================================================
+   JAMAICA DATE
+========================================================= */
+
+function jamaicaToday(){
+
+  const parts =
+
+  new Intl.DateTimeFormat(
+
+    "en-CA",
+
+    {
+
+      timeZone:
+      "America/Jamaica",
+
+      year:
+      "numeric",
+
+      month:
+      "2-digit",
+
+      day:
+      "2-digit"
+
+    }
+
+  )
+  .formatToParts(
+    new Date()
+  );
+
+
+  const values = {};
+
+
+  parts.forEach(
+
+    function(part){
+
+      if(
+        part.type !==
+        "literal"
+      ){
+
+        values[
+          part.type
+        ] =
+        part.value;
+
+      }
+
+    }
+
+  );
+
+
+  return (
+
+    values.year +
+
+    "-" +
+
+    values.month +
+
+    "-" +
+
+    values.day
+
+  );
+
+}
+
+
+/* =========================================================
+   7 DAYS
+========================================================= */
+
+function sevenDates(){
+
+  const start =
+
+  new Date(
+
+    jamaicaToday() +
+
+    "T12:00:00Z"
+
+  );
+
+
+  const dates = [];
+
+
+  for(
+    let i=0;
+    i<7;
+    i++
+  ){
+
+    const d =
+    new Date(
+      start
+    );
+
+
+    d.setUTCDate(
+
+      start.getUTCDate() +
+      i
+
+    );
+
+
+    dates.push(
+
+      d
+      .toISOString()
+      .slice(
+        0,
+        10
+      )
+
+    );
+
+  }
+
+
+  return dates;
+
+}
+
+
+function shortDate(
+  date
+){
+
+  return new Date(
+
+    date +
+    "T12:00:00Z"
+
+  )
+
+  .toLocaleDateString(
+
+    "en-US",
+
+    {
+
+      timeZone:
+      "UTC",
+
+      month:
+      "short",
+
+      day:
+      "numeric"
+
+    }
+
+  );
+
+}
+
+
+function dayName(
+  date
+){
+
+  return new Date(
+
+    date +
+    "T12:00:00Z"
+
+  )
+
+  .toLocaleDateString(
+
+    "en-US",
+
+    {
+
+      timeZone:
+      "UTC",
+
+      weekday:
+      "short"
+
+    }
+
+  )
+
+  .toUpperCase();
+
+}
+
+
+/* =========================================================
+   BUILD EMPTY 7-DAY BOARD
+========================================================= */
+
+function buildShell(){
+
+  const dates =
+  sevenDates();
+
+
+  document
+  .getElementById(
+    "range"
+  )
+  .textContent =
+
+  shortDate(
+    dates[0]
+  )
+
+  +
+
+  " — "
+
+  +
+
+  shortDate(
+    dates[6]
+  );
+
+
+  let html = "";
+
+
+  dates.forEach(
+
+    function(date){
+
+
+      html +=
+      '<section class="dayCard">';
+
+
+      html +=
+
+      '<div class="dayHeader">' +
+
+        '<div class="dow">' +
+
+        dayName(
+          date
+        ) +
+
+        '</div>' +
+
+        '<div class="date">' +
+
+        shortDate(
+          date
+        ) +
+
+        '</div>' +
+
+      '</div>';
+
+
+      html +=
+      '<div class="locations">';
+
+
+      PLACES.forEach(
+
+        function(place){
+
+
+          html +=
+
+          '<div class="location">' +
+
+            '<div class="place">' +
+
+            escapeHTML(
+              place
+            ) +
+
+            '</div>' +
+
+
+            '<div class="tides">' +
+
+
+              '<div class="tide">' +
+
+                '<span class="tag high">' +
+
+                'HIGH' +
+
+                '</span>' +
+
+                '—' +
+
+              '</div>' +
+
+
+              '<div class="tide">' +
+
+                '<span class="tag low">' +
+
+                'LOW' +
+
+                '</span>' +
+
+                '—' +
+
+              '</div>' +
+
+
+            '</div>' +
+
+          '</div>';
+
+        }
+
+      );
+
+
+      html +=
+      '</div>';
+
+
+      html +=
+      '</section>';
+
+    }
+
+  );
+
+
+  document
+  .getElementById(
+    "board"
+  )
+  .innerHTML =
+  html;
+
+}
+
+
+/* =========================================================
+   TIME SORTING
+========================================================= */
+
+function timeKey(
+  value
+){
+
+  const match =
+
+  String(
+    value ||
+    ""
+  )
+
+  .match(
+
+    /^(\d{1,2}):(\d{2})\s*(AM|PM)$/i
+
+  );
+
+
+  if(
+    !match
+  ){
+
+    return "99:99";
+
+  }
+
+
+  let hour =
+
+  Number(
+    match[1]
+  );
+
+
+  const suffix =
+
+  match[3]
+  .toUpperCase();
+
+
+  if(
+
+    suffix ===
+    "PM"
+
+    &&
+
+    hour !==
+    12
+
+  ){
+
+    hour +=
+    12;
+
+  }
+
+
+  if(
+
+    suffix ===
+    "AM"
+
+    &&
+
+    hour ===
+    12
+
+  ){
+
+    hour =
+    0;
+
+  }
+
+
+  return (
+
+    String(
+      hour
+    )
+    .padStart(
+      2,
+      "0"
+    )
+
+    +
+
+    ":"
+
+    +
+
+    match[2]
+
+  );
+
+}
+
+
+/* =========================================================
+   HEIGHT
+========================================================= */
+
+function tideHeight(
+  row
+){
+
+  if(
+
+    row.height === undefined
+
+    ||
+
+    row.height === null
+
+    ||
+
+    row.height === ""
+
+  ){
+
+    return "";
+
+  }
+
+
+  return (
+
+    row.height +
+    "m"
+
+  );
+
+}
+
+
+/* =========================================================
+   DRAW LIVE DATA
+========================================================= */
+
+function draw(
+  rows
+){
+
+  const dates =
+  sevenDates();
+
+
+  const grouped = {};
+
+
+  dates.forEach(
+
+    function(date){
+
+
+      grouped[
+        date
+      ] = {};
+
+
+      PLACES.forEach(
+
+        function(place){
+
+
+          grouped[
+            date
+          ][
+            place
+          ] = {
+
+            high:
+            null,
+
+            low:
+            null
+
+          };
+
+        }
+
+      );
+
+    }
+
+  );
+
+
+  rows
+
+  .slice()
+
+  .sort(
+
+    function(
+      a,
+      b
+    ){
+
+      const first =
+
+      (a.date || "") +
+
+      " " +
+
+      timeKey(
+        a.time
+      );
+
+
+      const second =
+
+      (b.date || "") +
+
+      " " +
+
+      timeKey(
+        b.time
+      );
+
+
+      return first.localeCompare(
+        second
+      );
+
+    }
+
+  )
+
+  .forEach(
+
+    function(row){
+
+
+      const date =
+
+      String(
+        row.date ||
+        ""
+      )
+      .trim();
+
+
+      const place =
+
+      String(
+        row.location ||
+        ""
+      )
+      .trim();
+
+
+      if(
+        !grouped[
+          date
+        ]
+      ){
+
+        return;
+
+      }
+
+
+      if(
+        !grouped[
+          date
+        ][
+          place
+        ]
+      ){
+
+        return;
+
+      }
+
+
+      const type =
+
+      String(
+        row.tide ||
+        ""
+      )
+      .toLowerCase();
+
+
+      if(
+
+        type.includes(
+          "high"
+        )
+
+        &&
+
+        !grouped[
+          date
+        ][
+          place
+        ].high
+
+      ){
+
+        grouped[
+          date
+        ][
+          place
+        ].high =
+        row;
+
+      }
+
+
+      if(
+
+        type.includes(
+          "low"
+        )
+
+        &&
+
+        !grouped[
+          date
+        ][
+          place
+        ].low
+
+      ){
+
+        grouped[
+          date
+        ][
+          place
+        ].low =
+        row;
+
+      }
+
+    }
+
+  );
+
+
+  let html = "";
+
+
+  dates.forEach(
+
+    function(date){
+
+
+      html +=
+      '<section class="dayCard">';
+
+
+      html +=
+
+      '<div class="dayHeader">' +
+
+        '<div class="dow">' +
+
+        dayName(
+          date
+        ) +
+
+        '</div>' +
+
+        '<div class="date">' +
+
+        shortDate(
+          date
+        ) +
+
+        '</div>' +
+
+      '</div>';
+
+
+      html +=
+      '<div class="locations">';
+
+
+      PLACES.forEach(
+
+        function(place){
+
+
+          const data =
+
+          grouped[
+            date
+          ][
+            place
+          ];
+
+
+          const high =
+
+          data.high ||
+          {};
+
+
+          const low =
+
+          data.low ||
+          {};
+
+
+          html +=
+
+          '<div class="location">' +
+
+
+            '<div class="place">' +
+
+            escapeHTML(
+              place
+            ) +
+
+            '</div>' +
+
+
+            '<div class="tides">' +
+
+
+              '<div class="tide">' +
+
+                '<span class="tag high">' +
+
+                'HIGH' +
+
+                '</span>' +
+
+                escapeHTML(
+                  high.time ||
+                  "—"
+                ) +
+
+                '<span class="height">' +
+
+                escapeHTML(
+                  tideHeight(
+                    high
+                  )
+                ) +
+
+                '</span>' +
+
+              '</div>' +
+
+
+              '<div class="tide">' +
+
+                '<span class="tag low">' +
+
+                'LOW' +
+
+                '</span>' +
+
+                escapeHTML(
+                  low.time ||
+                  "—"
+                ) +
+
+                '<span class="height">' +
+
+                escapeHTML(
+                  tideHeight(
+                    low
+                  )
+                ) +
+
+                '</span>' +
+
+              '</div>' +
+
+
+            '</div>' +
+
+          '</div>';
+
+        }
+
+      );
+
+
+      html +=
+      '</div>';
+
+
+      html +=
+      '</section>';
+
+    }
+
+  );
+
+
+  document
+  .getElementById(
+    "board"
+  )
+  .innerHTML =
+  html;
+
+}
+
+
+/* =========================================================
+   SAVED CACHE
+========================================================= */
+
+function loadSaved(){
+
+  try{
+
+
+    const saved =
+
+    localStorage.getItem(
+
+      CACHE_KEY
+
+    );
+
+
+    if(
+      !saved
+    ){
+
+      return;
+
+    }
+
+
+    const rows =
+
+    JSON.parse(
+      saved
+    );
+
+
+    if(
+
+      Array.isArray(
+        rows
+      )
+
+      &&
+
+      rows.length
+
+    ){
+
+      draw(
+        rows
+      );
+
+
+      document
+      .getElementById(
+        "status"
+      )
+      .innerHTML =
+
+      '<span class="dot"></span>' +
+
+      'SAVED • REFRESHING';
+
+    }
+
+  }
+
+  catch(
+    error
+  ){}
+
+}
+
+
+/* =========================================================
+   LIVE CALLBACK
+========================================================= */
+
+window.VMMTideFeed =
+
+function(
+  payload
+){
+
+  if(
+
+    !payload
+
+    ||
+
+    !payload.ok
+
+    ||
+
+    !Array.isArray(
+      payload.rows
+    )
+
+  ){
+
+    return;
+
+  }
+
+
+  try{
+
+    localStorage.setItem(
+
+      CACHE_KEY,
+
+      JSON.stringify(
+        payload.rows
+      )
+
+    );
+
+  }
+
+  catch(
+    error
+  ){}
+
+
+  draw(
+    payload.rows
+  );
+
+
+  document
+  .getElementById(
+    "status"
+  )
+  .innerHTML =
+
+  '<span class="dot"></span>' +
+
+  'LIVE • ' +
+
+  jamaicaTime();
+
+};
+
+
+/* =========================================================
+   REFRESH LIVE FEED
+========================================================= */
+
+function refreshFeed(){
+
+  const old =
+
+  document
+  .getElementById(
+    "tideFeedScript"
+  );
+
+
+  if(
+    old
+  ){
+
+    old.remove();
+
+  }
+
+
+  const script =
+
+  document.createElement(
+    "script"
+  );
+
+
+  script.id =
+  "tideFeedScript";
+
+
+  script.src =
+
+  FEED_URL +
+
+  "&callback=VMMTideFeed&_=" +
+
+  Date.now();
+
+
+  script.onerror =
+
+  function(){
+
+    document
+    .getElementById(
+      "status"
+    )
+    .innerHTML =
+
+    '<span class="dot"></span>' +
+
+    'SAVED DATA';
+
+  };
+
+
+  document.body
+  .appendChild(
+    script
+  );
+
+}
+
+
+/* =========================================================
+   SAFE TEXT
+========================================================= */
+
+function escapeHTML(
+  value
+){
+
+  return String(
+    value ||
+    ""
+  )
+
+  .replace(
+    /&/g,
+    "&amp;"
+  )
+
+  .replace(
+    /</g,
+    "&lt;"
+  )
+
+  .replace(
+    />/g,
+    "&gt;"
+  )
+
+  .replace(
+    /"/g,
+    "&quot;"
+  )
+
+  .replace(
+    /'/g,
+    "&#039;"
+  );
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+buildShell();
+
+loadSaved();
+
+updateClock();
+
+refreshFeed();
+
+
+setInterval(
+  updateClock,
+  1000
+);
+
+
+setInterval(
+  refreshFeed,
+  5 * 60 * 1000
+);
+
+</script>
+
+</body>
+
+</html>
