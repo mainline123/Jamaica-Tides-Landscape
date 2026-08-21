@@ -23,17 +23,10 @@ body{
   width:100%;
   height:100%;
   overflow:hidden;
-
   font-family:Arial,Helvetica,sans-serif;
-
   background:#063f5b;
   color:#ffffff;
 }
-
-
-/* =========================
-   MAIN 16:9 PAGE
-========================= */
 
 .page{
   width:100vw;
@@ -42,7 +35,7 @@ body{
   display:grid;
 
   grid-template-rows:
-    15%
+    19%
     7%
     1fr
     4%;
@@ -62,8 +55,8 @@ body{
 
 .header{
   padding:
-    2vh
-    2.6vw
+    1.4vh
+    1.6vw
     1vh;
 
   border-bottom:
@@ -76,51 +69,162 @@ body{
     auto;
 
   align-items:center;
+
+  gap:1.6vw;
 }
 
 .title{
-  font-size:5.5vh;
+  font-size:5.4vh;
   line-height:.95;
   font-weight:900;
 }
 
 .subtitle{
-  margin-top:.6vh;
+  margin-top:.55vh;
 
-  font-size:3vh;
+  font-size:2.9vh;
   font-weight:900;
 
   color:#f6c41f;
 }
 
 .range{
-  margin-top:1vh;
+  margin-top:.9vh;
 
-  font-size:1.7vh;
+  font-size:1.65vh;
   font-weight:800;
 
   color:#d6e8f1;
 }
 
+
+/* =========================
+   QR AREA
+========================= */
+
 .headerRight{
   display:flex;
   align-items:center;
-  justify-content:flex-end;
+  gap:1.4vw;
 }
+
+.qrCard{
+  height:16vh;
+  min-width:24vw;
+
+  padding:
+    .7vh
+    .8vw;
+
+  background:#ffffff;
+
+  color:#064b71;
+
+  border:
+    .35vh solid #f6c41f;
+
+  border-radius:1.1vh;
+
+  display:grid;
+
+  grid-template-columns:
+    auto
+    1fr;
+
+  align-items:center;
+
+  gap:.85vw;
+
+  box-shadow:
+    0
+    .35vh
+    1vh
+    rgba(0,0,0,.25);
+}
+
+.qrImage{
+  width:13vh;
+  height:13vh;
+
+  background:#ffffff;
+
+  padding:.4vh;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+}
+
+.qrImage img{
+  width:100%;
+  height:100%;
+
+  object-fit:contain;
+
+  display:block;
+}
+
+.qrText{
+  min-width:0;
+}
+
+.qrTop{
+  font-size:1.65vh;
+
+  font-weight:900;
+
+  color:#078147;
+
+  line-height:1.05;
+}
+
+.qrMain{
+  margin-top:.45vh;
+
+  font-size:2.05vh;
+
+  font-weight:900;
+
+  line-height:1.05;
+
+  color:#07547f;
+}
+
+.qrSmall{
+  margin-top:.5vh;
+
+  font-size:1.05vh;
+
+  font-weight:800;
+
+  color:#607c8c;
+
+  line-height:1.15;
+}
+
+
+/* =========================
+   CLOCK
+========================= */
 
 .clockBox{
   text-align:right;
+
+  min-width:8vw;
 }
 
 .clock{
-  font-size:3.1vh;
+  font-size:2.8vh;
+
   font-weight:900;
 }
 
 .clockLabel{
-  margin-top:.4vh;
+  margin-top:.35vh;
 
-  font-size:1.15vh;
+  font-size:1vh;
 
   color:#f6c41f;
 
@@ -134,13 +238,13 @@ body{
 
 .greenBar{
   margin:
-    .8vh
-    1.5vw
+    .7vh
+    1.2vw
     0;
 
   padding:
     0
-    2vw;
+    1.7vw;
 
   background:#078147;
 
@@ -156,22 +260,22 @@ body{
 
   justify-content:space-between;
 
-  font-size:2.7vh;
+  font-size:2.45vh;
 
   font-weight:900;
 }
 
 .status{
-  font-size:1.9vh;
+  font-size:1.6vh;
 }
 
 .dot{
   display:inline-block;
 
-  width:1.2vh;
-  height:1.2vh;
+  width:1.05vh;
+  height:1.05vh;
 
-  margin-right:.5vh;
+  margin-right:.45vh;
 
   border-radius:50%;
 
@@ -186,24 +290,19 @@ body{
 .board{
   margin:
     0
-    1.5vw;
+    1.2vw;
 
   display:grid;
 
   grid-template-columns:
     repeat(7,1fr);
 
-  gap:.42vw;
+  gap:.36vw;
 
   min-height:0;
 
   overflow:hidden;
 }
-
-
-/* =========================
-   DAY CARD
-========================= */
 
 .dayCard{
   min-width:0;
@@ -221,16 +320,16 @@ body{
   border-radius:
     0
     0
-    .8vh
-    .8vh;
+    .75vh
+    .75vh;
 
   overflow:hidden;
 
   box-shadow:
     0
-    .25vh
-    .7vh
-    rgba(0,0,0,.18);
+    .22vh
+    .65vh
+    rgba(0,0,0,.16);
 }
 
 
@@ -256,15 +355,15 @@ body{
 }
 
 .dow{
-  font-size:3.4vh;
+  font-size:3.1vh;
 
   font-weight:900;
 }
 
 .date{
-  margin-top:.3vh;
+  margin-top:.22vh;
 
-  font-size:1.8vh;
+  font-size:1.7vh;
 
   font-weight:900;
 }
@@ -285,8 +384,8 @@ body{
 
 .location{
   padding:
-    .55vh
-    .55vw;
+    .45vh
+    .45vw;
 
   display:grid;
 
@@ -303,7 +402,7 @@ body{
 }
 
 .place{
-  font-size:1.55vh;
+  font-size:1.35vh;
 
   line-height:1.05;
 
@@ -324,7 +423,7 @@ body{
 ========================= */
 
 .tides{
-  margin-top:.5vh;
+  margin-top:.32vh;
 
   display:grid;
 
@@ -334,7 +433,7 @@ body{
     auto
     auto;
 
-  gap:.55vh;
+  gap:.34vh;
 }
 
 .tide{
@@ -344,9 +443,9 @@ body{
 
   width:100%;
 
-  font-size:1.5vh;
+  font-size:1.28vh;
 
-  line-height:1.15;
+  line-height:1.1;
 
   font-weight:900;
 
@@ -362,13 +461,13 @@ body{
 
   justify-content:center;
 
-  min-width:3.15vw;
+  min-width:3vw;
 
-  margin-right:.38vw;
+  margin-right:.28vw;
 
   padding:
-    .34vh
-    .3vw;
+    .24vh
+    .25vw;
 
   border-radius:999px;
 
@@ -376,7 +475,7 @@ body{
 
   text-align:center;
 
-  font-size:.88vh;
+  font-size:.76vh;
 
   font-weight:900;
 
@@ -392,9 +491,9 @@ body{
 }
 
 .height{
-  margin-left:.35vw;
+  margin-left:.28vw;
 
-  font-size:1.02vh;
+  font-size:.9vh;
 
   color:#607c8c;
 
@@ -409,7 +508,7 @@ body{
 .footer{
   padding:
     0
-    1.6vw;
+    1.3vw;
 
   display:flex;
 
@@ -417,7 +516,7 @@ body{
 
   justify-content:space-between;
 
-  font-size:1.05vh;
+  font-size:.92vh;
 
   color:#bad0dc;
 }
@@ -438,9 +537,7 @@ body{
 <div class="page">
 
 
-<!-- =========================
-     HEADER
-========================= -->
+<!-- HEADER -->
 
 <header class="header">
 
@@ -465,6 +562,41 @@ body{
 
   <div class="headerRight">
 
+
+    <!-- QR CODE -->
+
+    <div class="qrCard">
+
+      <div class="qrImage">
+
+        <img
+          id="qrCode"
+          alt="Scan Jamaica Tides">
+
+      </div>
+
+
+      <div class="qrText">
+
+        <div class="qrTop">
+          SCAN WITH YOUR PHONE
+        </div>
+
+        <div class="qrMain">
+          TAKE JAMAICA TIDES WITH YOU
+        </div>
+
+        <div class="qrSmall">
+          Opens our mobile-friendly portrait tide schedule.
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- CLOCK -->
+
     <div class="clockBox">
 
       <div
@@ -484,9 +616,7 @@ body{
 </header>
 
 
-<!-- =========================
-     GREEN BAR
-========================= -->
+<!-- GREEN BAR -->
 
 <div class="greenBar">
 
@@ -507,9 +637,7 @@ body{
 </div>
 
 
-<!-- =========================
-     7 DAY BOARD
-========================= -->
+<!-- TIDE BOARD -->
 
 <main
   id="board"
@@ -517,9 +645,7 @@ body{
 </main>
 
 
-<!-- =========================
-     FOOTER
-========================= -->
+<!-- FOOTER -->
 
 <footer class="footer">
 
@@ -537,8 +663,26 @@ body{
 </div>
 
 
-
 <script>
+
+/* =========================================================
+   PORTRAIT PHONE PAGE
+========================================================= */
+
+const MOBILE_URL =
+"https://mainline123.github.io/Jamacia-Tides/";
+
+
+/* =========================================================
+   QR CODE
+========================================================= */
+
+document
+.getElementById("qrCode")
+.src =
+"https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=" +
+encodeURIComponent(MOBILE_URL);
+
 
 /* =========================================================
    LIVE TIDE FEED
@@ -564,7 +708,7 @@ const PLACES = [
 
 
 const CACHE_KEY =
-"jamaica_tides_landscape_stacked_v3";
+"jamaica_tides_landscape_qr_v4";
 
 
 /* =========================================================
@@ -600,9 +744,7 @@ function jamaicaTime(){
 function updateClock(){
 
   document
-  .getElementById(
-    "clock"
-  )
+  .getElementById("clock")
   .textContent =
   jamaicaTime();
 
@@ -610,7 +752,7 @@ function updateClock(){
 
 
 /* =========================================================
-   CURRENT JAMAICA DATE
+   JAMAICA DATE
 ========================================================= */
 
 function jamaicaToday(){
@@ -638,6 +780,7 @@ function jamaicaToday(){
     }
 
   )
+
   .formatToParts(
     new Date()
   );
@@ -711,9 +854,7 @@ function sevenDates(){
   ){
 
     const d =
-    new Date(
-      start
-    );
+    new Date(start);
 
 
     d.setUTCDate(
@@ -728,10 +869,7 @@ function sevenDates(){
 
       d
       .toISOString()
-      .slice(
-        0,
-        10
-      )
+      .slice(0,10)
 
     );
 
@@ -743,9 +881,7 @@ function sevenDates(){
 }
 
 
-function shortDate(
-  date
-){
+function shortDate(date){
 
   return new Date(
 
@@ -776,9 +912,7 @@ function shortDate(
 }
 
 
-function dayName(
-  date
-){
+function dayName(date){
 
   return new Date(
 
@@ -809,7 +943,7 @@ function dayName(
 
 
 /* =========================================================
-   BUILD EMPTY 7-DAY BOARD
+   BUILD SCREEN
 ========================================================= */
 
 function buildShell(){
@@ -819,14 +953,10 @@ function buildShell(){
 
 
   document
-  .getElementById(
-    "range"
-  )
+  .getElementById("range")
   .textContent =
 
-  shortDate(
-    dates[0]
-  )
+  shortDate(dates[0])
 
   +
 
@@ -834,9 +964,7 @@ function buildShell(){
 
   +
 
-  shortDate(
-    dates[6]
-  );
+  shortDate(dates[6]);
 
 
   let html = "";
@@ -857,17 +985,13 @@ function buildShell(){
 
         '<div class="dow">' +
 
-        dayName(
-          date
-        ) +
+        dayName(date) +
 
         '</div>' +
 
         '<div class="date">' +
 
-        shortDate(
-          date
-        ) +
+        shortDate(date) +
 
         '</div>' +
 
@@ -889,9 +1013,7 @@ function buildShell(){
 
             '<div class="place">' +
 
-            escapeHTML(
-              place
-            ) +
+            escapeHTML(place) +
 
             '</div>' +
 
@@ -947,9 +1069,7 @@ function buildShell(){
 
 
   document
-  .getElementById(
-    "board"
-  )
+  .getElementById("board")
   .innerHTML =
   html;
 
@@ -960,15 +1080,12 @@ function buildShell(){
    TIME SORTING
 ========================================================= */
 
-function timeKey(
-  value
-){
+function timeKey(value){
 
   const match =
 
   String(
-    value ||
-    ""
+    value || ""
   )
 
   .match(
@@ -978,9 +1095,7 @@ function timeKey(
   );
 
 
-  if(
-    !match
-  ){
+  if(!match){
 
     return "99:99";
 
@@ -988,63 +1103,40 @@ function timeKey(
 
 
   let hour =
-
-  Number(
-    match[1]
-  );
+  Number(match[1]);
 
 
   const suffix =
-
   match[3]
   .toUpperCase();
 
 
   if(
-
-    suffix ===
-    "PM"
-
+    suffix === "PM"
     &&
-
-    hour !==
-    12
-
+    hour !== 12
   ){
 
-    hour +=
-    12;
+    hour += 12;
 
   }
 
 
   if(
-
-    suffix ===
-    "AM"
-
+    suffix === "AM"
     &&
-
-    hour ===
-    12
-
+    hour === 12
   ){
 
-    hour =
-    0;
+    hour = 0;
 
   }
 
 
   return (
 
-    String(
-      hour
-    )
-    .padStart(
-      2,
-      "0"
-    )
+    String(hour)
+    .padStart(2,"0")
 
     +
 
@@ -1060,12 +1152,10 @@ function timeKey(
 
 
 /* =========================================================
-   HEIGHT DISPLAY
+   TIDE HEIGHT
 ========================================================= */
 
-function tideHeight(
-  row
-){
+function tideHeight(row){
 
   if(
 
@@ -1087,22 +1177,18 @@ function tideHeight(
 
 
   return (
-
     row.height +
     "m"
-
   );
 
 }
 
 
 /* =========================================================
-   DRAW LIVE DATA
+   DRAW LIVE TIDES
 ========================================================= */
 
-function draw(
-  rows
-){
+function draw(rows){
 
   const dates =
   sevenDates();
@@ -1116,9 +1202,7 @@ function draw(
     function(date){
 
 
-      grouped[
-        date
-      ] = {};
+      grouped[date] = {};
 
 
       PLACES.forEach(
@@ -1126,11 +1210,7 @@ function draw(
         function(place){
 
 
-          grouped[
-            date
-          ][
-            place
-          ] = {
+          grouped[date][place] = {
 
             high:null,
 
@@ -1153,31 +1233,32 @@ function draw(
 
   .sort(
 
-    function(
-      a,
-      b
-    ){
+    function(a,b){
 
       const first =
 
-      (a.date || "") +
+      (a.date || "")
 
-      " " +
+      +
 
-      timeKey(
-        a.time
-      );
+      " "
+
+      +
+
+      timeKey(a.time);
 
 
       const second =
 
-      (b.date || "") +
+      (b.date || "")
 
-      " " +
+      +
 
-      timeKey(
-        b.time
-      );
+      " "
+
+      +
+
+      timeKey(b.time);
 
 
       return first.localeCompare(
@@ -1196,8 +1277,7 @@ function draw(
       const date =
 
       String(
-        row.date ||
-        ""
+        row.date || ""
       )
       .trim();
 
@@ -1205,16 +1285,13 @@ function draw(
       const place =
 
       String(
-        row.location ||
-        ""
+        row.location || ""
       )
       .trim();
 
 
       if(
-        !grouped[
-          date
-        ]
+        !grouped[date]
       ){
 
         return;
@@ -1223,11 +1300,7 @@ function draw(
 
 
       if(
-        !grouped[
-          date
-        ][
-          place
-        ]
+        !grouped[date][place]
       ){
 
         return;
@@ -1238,33 +1311,22 @@ function draw(
       const type =
 
       String(
-        row.tide ||
-        ""
+        row.tide || ""
       )
       .toLowerCase();
 
 
       if(
 
-        type.includes(
-          "high"
-        )
+        type.includes("high")
 
         &&
 
-        !grouped[
-          date
-        ][
-          place
-        ].high
+        !grouped[date][place].high
 
       ){
 
-        grouped[
-          date
-        ][
-          place
-        ].high =
+        grouped[date][place].high =
         row;
 
       }
@@ -1272,25 +1334,15 @@ function draw(
 
       if(
 
-        type.includes(
-          "low"
-        )
+        type.includes("low")
 
         &&
 
-        !grouped[
-          date
-        ][
-          place
-        ].low
+        !grouped[date][place].low
 
       ){
 
-        grouped[
-          date
-        ][
-          place
-        ].low =
+        grouped[date][place].low =
         row;
 
       }
@@ -1318,17 +1370,13 @@ function draw(
 
         '<div class="dow">' +
 
-        dayName(
-          date
-        ) +
+        dayName(date) +
 
         '</div>' +
 
         '<div class="date">' +
 
-        shortDate(
-          date
-        ) +
+        shortDate(date) +
 
         '</div>' +
 
@@ -1345,24 +1393,15 @@ function draw(
 
 
           const data =
-
-          grouped[
-            date
-          ][
-            place
-          ];
+          grouped[date][place];
 
 
           const high =
-
-          data.high ||
-          {};
+          data.high || {};
 
 
           const low =
-
-          data.low ||
-          {};
+          data.low || {};
 
 
           html +=
@@ -1372,9 +1411,7 @@ function draw(
 
             '<div class="place">' +
 
-            escapeHTML(
-              place
-            ) +
+            escapeHTML(place) +
 
             '</div>' +
 
@@ -1391,16 +1428,13 @@ function draw(
                 '</span>' +
 
                 escapeHTML(
-                  high.time ||
-                  "—"
+                  high.time || "—"
                 ) +
 
                 '<span class="height">' +
 
                 escapeHTML(
-                  tideHeight(
-                    high
-                  )
+                  tideHeight(high)
                 ) +
 
                 '</span>' +
@@ -1417,16 +1451,13 @@ function draw(
                 '</span>' +
 
                 escapeHTML(
-                  low.time ||
-                  "—"
+                  low.time || "—"
                 ) +
 
                 '<span class="height">' +
 
                 escapeHTML(
-                  tideHeight(
-                    low
-                  )
+                  tideHeight(low)
                 ) +
 
                 '</span>' +
@@ -1456,9 +1487,7 @@ function draw(
 
 
   document
-  .getElementById(
-    "board"
-  )
+  .getElementById("board")
   .innerHTML =
   html;
 
@@ -1466,7 +1495,7 @@ function draw(
 
 
 /* =========================================================
-   LOAD SAVED DATA
+   SAVED DATA
 ========================================================= */
 
 function loadSaved(){
@@ -1477,15 +1506,11 @@ function loadSaved(){
     const saved =
 
     localStorage.getItem(
-
       CACHE_KEY
-
     );
 
 
-    if(
-      !saved
-    ){
+    if(!saved){
 
       return;
 
@@ -1494,16 +1519,12 @@ function loadSaved(){
 
     const rows =
 
-    JSON.parse(
-      saved
-    );
+    JSON.parse(saved);
 
 
     if(
 
-      Array.isArray(
-        rows
-      )
+      Array.isArray(rows)
 
       &&
 
@@ -1511,15 +1532,11 @@ function loadSaved(){
 
     ){
 
-      draw(
-        rows
-      );
+      draw(rows);
 
 
       document
-      .getElementById(
-        "status"
-      )
+      .getElementById("status")
       .innerHTML =
 
       '<span class="dot"></span>' +
@@ -1530,22 +1547,18 @@ function loadSaved(){
 
   }
 
-  catch(
-    error
-  ){}
+  catch(error){}
 
 }
 
 
 /* =========================================================
-   LIVE GOOGLE APPS SCRIPT CALLBACK
+   LIVE CALLBACK
 ========================================================= */
 
 window.VMMTideFeed =
 
-function(
-  payload
-){
+function(payload){
 
   if(
 
@@ -1582,9 +1595,7 @@ function(
 
   }
 
-  catch(
-    error
-  ){}
+  catch(error){}
 
 
   draw(
@@ -1593,9 +1604,7 @@ function(
 
 
   document
-  .getElementById(
-    "status"
-  )
+  .getElementById("status")
   .innerHTML =
 
   '<span class="dot"></span>' +
@@ -1608,7 +1617,7 @@ function(
 
 
 /* =========================================================
-   REFRESH LIVE FEED
+   REFRESH FEED
 ========================================================= */
 
 function refreshFeed(){
@@ -1621,9 +1630,7 @@ function refreshFeed(){
   );
 
 
-  if(
-    old
-  ){
+  if(old){
 
     old.remove();
 
@@ -1655,9 +1662,7 @@ function refreshFeed(){
   function(){
 
     document
-    .getElementById(
-      "status"
-    )
+    .getElementById("status")
     .innerHTML =
 
     '<span class="dot"></span>' +
@@ -1668,9 +1673,7 @@ function refreshFeed(){
 
 
   document.body
-  .appendChild(
-    script
-  );
+  .appendChild(script);
 
 }
 
@@ -1679,13 +1682,10 @@ function refreshFeed(){
    SAFE TEXT
 ========================================================= */
 
-function escapeHTML(
-  value
-){
+function escapeHTML(value){
 
   return String(
-    value ||
-    ""
+    value || ""
   )
 
   .replace(
@@ -1730,24 +1730,17 @@ refreshFeed();
 
 
 setInterval(
-
   updateClock,
-
   1000
-
 );
 
 
 setInterval(
-
   refreshFeed,
-
   5 * 60 * 1000
-
 );
 
 </script>
-
 
 </body>
 
