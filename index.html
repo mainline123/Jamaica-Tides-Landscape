@@ -131,31 +131,43 @@
   </main>
 
   <script>
-    // Replace with your Google Apps Script Web App Exec URL
-    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwP66KnR7wD0BdmHhUQc4IboeLvOXd8UD2ODKO4_N5YkwCSmrV589cxoV4yp-QankOo/exec?feed=1';
+    const APPS_SCRIPT_BASE_URL = 'https://script.google.com/macros/s/AKfycbwP66KnR7wD0BdmHhUQc4IboeLvOXd8UD2ODKO4_N5YkwCSmrV589cxoV4yp-QankOo/exec?feed=1&callback=handleTideData';
 
-    async function fetchTideData() {
-      try {
-        const response = await fetch(APPS_SCRIPT_URL);
-        const data = await response.json();
-
-        if (!data || !data.rows) {
-          throw new Error('Invalid data payload received');
-        }
-
-        document.getElementById('updated-time').innerText = `Updated: ${data.updated || 'Just now'}`;
-        renderGrid(data.rows);
-      } catch (err) {
-        console.error('Error fetching tide feed:', err);
+    // JSONP Callback Function
+    function handleTideData(data) {
+      if (!data || !data.rows) {
         document.getElementById('tide-grid').innerHTML = `
           <div class="error-msg">
-            Unable to load live tide data. Please check Apps Script execution logs.
+            No tide data received. Please run refreshJamaicaTidesScraper in Apps Script.
           </div>`;
+        return;
       }
+
+      document.getElementById('updated-time').innerText = `Updated: ${data.updated || 'Just now'}`;
+      renderGrid(data.rows);
+    }
+
+    function loadTideFeedJSONP() {
+      // Remove any existing dynamic script tag
+      const oldScript = document.getElementById('jsonp-tide-script');
+      if (oldScript) {
+        oldScript.remove();
+      }
+
+      // Inject new script tag to fetch fresh payload
+      const script = document.createElement('script');
+      script.id = 'jsonp-tide-script';
+      script.src = `${APPS_SCRIPT_BASE_URL}&_ts=${Date.now()}`;
+      script.onerror = function() {
+        document.getElementById('tide-grid').innerHTML = `
+          <div class="error-msg">
+            Unable to connect to live Apps Script feed.
+          </div>`;
+      };
+      document.body.appendChild(script);
     }
 
     function renderGrid(rows) {
-      // Group rows by location
       const locations = {};
 
       rows.forEach(row => {
@@ -196,11 +208,11 @@
       });
     }
 
-    // Fetch immediately on load
-    fetchTideData();
+    // Load feed immediately on launch
+    loadTideFeedJSONP();
 
-    // Auto-refresh every 30 minutes
-    setInterval(fetchTideData, 30 * 60 * 1000);
+    // Refresh every 30 minutes
+    setInterval(loadTideFeedJSONP, 30 * 60 * 1000);
   </script>
 </body>
 </html>
