@@ -3,11 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jamaica Coastal Tides - Live predictions</title>
+  <title>Jamaica Coastal Tides - Live Predictions</title>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
-      font-family: 'Segoe UI', Roboto, sans-serif;
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
       background-color: #0d3b59;
       color: #ffffff;
       height: 100vh;
@@ -16,6 +21,7 @@
       padding: 20px;
       overflow: hidden;
     }
+
     header {
       display: flex;
       justify-content: space-between;
@@ -24,9 +30,27 @@
       padding-bottom: 10px;
       margin-bottom: 20px;
     }
-    h1 { font-size: 2rem; font-weight: 800; letter-spacing: 1px; color: #ffffff; text-transform: uppercase; }
-    .subtitle { font-size: 0.9rem; color: #f1c40f; font-weight: 600; }
-    .timestamp { font-size: 0.85rem; color: #bdc3c7; }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: #ffffff;
+      text-transform: uppercase;
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      color: #f1c40f;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .timestamp {
+      font-size: 0.85rem;
+      color: #bdc3c7;
+    }
+
     .grid-container {
       flex: 1;
       display: grid;
@@ -35,6 +59,7 @@
       align-items: stretch;
       height: calc(100vh - 100px);
     }
+
     .card {
       background: #ffffff;
       color: #2c3e50;
@@ -44,25 +69,39 @@
       flex-direction: column;
       box-shadow: 0 4px 12px rgba(0,0,0,0.25);
     }
+
     .card-title {
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       font-weight: 700;
       color: #1e824c;
       text-align: center;
-      margin-bottom: 15px;
+      margin-bottom: 12px;
       border-bottom: 1px solid #ecf0f1;
       padding-bottom: 8px;
     }
-    .tide-list { list-style: none; display: flex; flex-direction: column; gap: 10px; overflow-y: auto; }
+
+    .tide-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      overflow-y: auto;
+    }
+
     .tide-item {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 6px 4px;
+      padding: 6px 2px;
       font-size: 0.85rem;
       border-bottom: 1px dashed #f0f0f0;
     }
-    .tide-time { font-weight: 600; width: 35%; }
+
+    .tide-time {
+      font-weight: 600;
+      width: 35%;
+    }
+
     .tag {
       padding: 3px 6px;
       border-radius: 4px;
@@ -72,9 +111,29 @@
       text-align: center;
       width: 30%;
     }
-    .tag.high { background-color: #2980b9; }
-    .tag.low { background-color: #c0392b; }
-    .height { font-weight: 600; color: #7f8c8d; width: 35%; text-align: right; }
+
+    .tag.high {
+      background-color: #2980b9;
+    }
+
+    .tag.low {
+      background-color: #c0392b;
+    }
+
+    .height {
+      font-weight: 600;
+      color: #7f8c8d;
+      width: 35%;
+      text-align: right;
+    }
+
+    .error-msg {
+      grid-column: span 5;
+      color: #e74c3c;
+      text-align: center;
+      font-size: 1.2rem;
+      margin-top: 50px;
+    }
   </style>
 </head>
 <body>
@@ -88,64 +147,79 @@
   </header>
 
   <main class="grid-container" id="tide-grid">
-    <!-- 5 Coastal Location Cards Render Here -->
+    <!-- Dynamic Cards Render Here -->
   </main>
 
   <script>
     function handleTideData(data) {
-      if (!data) return;
+      console.log("Payload received:", data);
+      
+      const gridContainer = document.getElementById('tide-grid');
+      
+      if (!data) {
+        gridContainer.innerHTML = '<div class="error-msg">Failed to load tide data.</div>';
+        return;
+      }
 
       if (data.updated) {
         document.getElementById('updated-time').innerText = 'Updated: ' + data.updated;
       }
 
-      // Handle both data.rows and raw array fallbacks
-      const rowList = data.rows || (Array.isArray(data) ? data : []);
+      let rows = [];
+      if (Array.isArray(data.rows)) {
+        rows = data.rows;
+      } else if (Array.isArray(data)) {
+        rows = data;
+      }
+
+      if (rows.length === 0) {
+        gridContainer.innerHTML = '<div class="error-msg">No tide predictions currently available.</div>';
+        return;
+      }
+
       const locations = {};
 
-      rowList.forEach(row => {
+      rows.forEach(row => {
         if (!Array.isArray(row) || row.length < 3) return;
 
-        let loc = row[0];
-        let date = row[1];
-        let time = row[2];
-        let tide = row[3];
-        let height = row[4];
+        let loc = String(row[0]).trim();
+        let time = String(row[2]).trim();
+        let tide = row[3] ? String(row[3]).trim() : '';
+        let height = row[4] ? String(row[4]).trim() : '';
 
-        // Skip headers, metadata, or bad rows
+        // Filter out headers or non-location metadata
         if (!loc || loc === 'Location' || loc === 'Last Updated' || loc.includes(':')) return;
 
-        // Clean leading single quotes or ISO strings
-        if (time && typeof time === 'string') {
-          if (time.startsWith("'")) time = time.substring(1);
-          if (time.includes('T')) {
-            time = time.split('T')[1].substring(0, 5);
-          }
-        }
+        // Strip explicit string escape quotes if present
+        if (time.startsWith("'")) time = time.substring(1);
 
         if (!locations[loc]) {
           locations[loc] = [];
         }
 
-        // Keep up to 5 events per card
         if (locations[loc].length < 5) {
           locations[loc].push({ time, tide, height });
         }
       });
 
-      const gridContainer = document.getElementById('tide-grid');
       gridContainer.innerHTML = '';
 
-      Object.keys(locations).forEach(locName => {
+      const locKeys = Object.keys(locations);
+      if (locKeys.length === 0) {
+        gridContainer.innerHTML = '<div class="error-msg">Parsing error: No valid locations found.</div>';
+        return;
+      }
+
+      locKeys.forEach(locName => {
         const events = locations[locName];
         
         const itemsHtml = events.map(evt => {
-          const isHigh = (evt.tide || '').toLowerCase() === 'high';
+          const isHigh = evt.tide.toLowerCase().includes('high');
           return `
             <li class="tide-item">
-              <span class="tide-time">${evt.time || ''}</span>
-              <span class="tag ${isHigh ? 'high' : 'low'}">${(evt.tide || '').toUpperCase()}</span>
-              <span class="height">${evt.height || ''}</span>
+              <span class="tide-time">${evt.time}</span>
+              <span class="tag ${isHigh ? 'high' : 'low'}">${evt.tide.toUpperCase() || 'TIDE'}</span>
+              <span class="height">${evt.height}</span>
             </li>`;
         }).join('');
 
@@ -162,13 +236,23 @@
     }
 
     function loadFeed() {
+      const oldScript = document.getElementById('jsonp-feed');
+      if (oldScript) oldScript.remove();
+
       const script = document.createElement('script');
-      const apiUrl = 'https://script.google.com/macros/s/AKfycbxO1OWtlVb_dt2KiSvlelIYNAyuWMBHDbYRFKCBIgVJR4r0l75EwBFVs-YFIFcM61UI/exec?callback=handleTideData';
-      script.src = apiUrl + '&t=' + new Date().getTime();
+      script.id = 'jsonp-feed';
+      const apiUrl = 'https://script.google.com/macros/s/AKfycbxEgTDAaaNsudZ-qe3WBW0wQF9_Tu__xv0FlRHrhmLXv8sknEjnnle3-V0txI_9ySis/exec?callback=handleTideData';
+      script.src = apiUrl + '&nocache=' + new Date().getTime();
+      
+      script.onerror = function() {
+        document.getElementById('tide-grid').innerHTML = '<div class="error-msg">Error connecting to endpoint. Verify Web App permissions.</div>';
+      };
+
       document.body.appendChild(script);
     }
 
-    loadFeed();
+    // Run on initial load and auto-refresh every 15 minutes
+    window.onload = loadFeed;
     setInterval(loadFeed, 15 * 60 * 1000);
   </script>
 </body>
