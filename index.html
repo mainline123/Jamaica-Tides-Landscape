@@ -5,14 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jamaica Coastal Tides - Live predictions</title>
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-family: 'Segoe UI', Roboto, sans-serif;
       background-color: #0d3b59;
       color: #ffffff;
       height: 100vh;
@@ -21,7 +16,6 @@
       padding: 20px;
       overflow: hidden;
     }
-
     header {
       display: flex;
       justify-content: space-between;
@@ -30,26 +24,9 @@
       padding-bottom: 10px;
       margin-bottom: 20px;
     }
-
-    h1 {
-      font-size: 2rem;
-      font-weight: 800;
-      letter-spacing: 1px;
-      color: #ffffff;
-      text-transform: uppercase;
-    }
-
-    .subtitle {
-      font-size: 0.9rem;
-      color: #f1c40f;
-      font-weight: 600;
-    }
-
-    .timestamp {
-      font-size: 0.85rem;
-      color: #bdc3c7;
-    }
-
+    h1 { font-size: 2rem; font-weight: 800; letter-spacing: 1px; color: #ffffff; text-transform: uppercase; }
+    .subtitle { font-size: 0.9rem; color: #f1c40f; font-weight: 600; }
+    .timestamp { font-size: 0.85rem; color: #bdc3c7; }
     .grid-container {
       flex: 1;
       display: grid;
@@ -58,7 +35,6 @@
       align-items: stretch;
       height: calc(100vh - 100px);
     }
-
     .card {
       background: #ffffff;
       color: #2c3e50;
@@ -68,7 +44,6 @@
       flex-direction: column;
       box-shadow: 0 4px 12px rgba(0,0,0,0.25);
     }
-
     .card-title {
       font-size: 1.25rem;
       font-weight: 700;
@@ -78,31 +53,18 @@
       border-bottom: 1px solid #ecf0f1;
       padding-bottom: 8px;
     }
-
-    .tide-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      overflow-y: auto;
-    }
-
+    .tide-list { list-style: none; display: flex; flex-direction: column; gap: 10px; overflow-y: auto; }
     .tide-item {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 6px 4px;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       border-bottom: 1px dashed #f0f0f0;
     }
-
-    .tide-time {
-      font-weight: 600;
-      width: 35%;
-    }
-
+    .tide-time { font-weight: 600; width: 35%; }
     .tag {
-      padding: 3px 8px;
+      padding: 3px 6px;
       border-radius: 4px;
       font-size: 0.75rem;
       font-weight: 700;
@@ -110,21 +72,9 @@
       text-align: center;
       width: 30%;
     }
-
-    .tag.high {
-      background-color: #2980b9;
-    }
-
-    .tag.low {
-      background-color: #c0392b;
-    }
-
-    .height {
-      font-weight: 600;
-      color: #7f8c8d;
-      width: 30%;
-      text-align: right;
-    }
+    .tag.high { background-color: #2980b9; }
+    .tag.low { background-color: #c0392b; }
+    .height { font-weight: 600; color: #7f8c8d; width: 35%; text-align: right; }
   </style>
 </head>
 <body>
@@ -142,26 +92,42 @@
   </main>
 
   <script>
-    // JSONP Callback handler
     function handleTideData(data) {
+      if (!data) return;
+
       if (data.updated) {
         document.getElementById('updated-time').innerText = 'Updated: ' + data.updated;
       }
 
+      // Handle both data.rows and raw array fallbacks
+      const rowList = data.rows || (Array.isArray(data) ? data : []);
       const locations = {};
 
-      (data.rows || []).forEach(row => {
-        let [loc, date, time, tide, height] = row;
-        if (!loc) return;
+      rowList.forEach(row => {
+        if (!Array.isArray(row) || row.length < 3) return;
 
-        // Strip single quotes or ISO formatting if present
-        if (time && time.startsWith("'")) time = time.substring(1);
+        let loc = row[0];
+        let date = row[1];
+        let time = row[2];
+        let tide = row[3];
+        let height = row[4];
+
+        // Skip headers, metadata, or bad rows
+        if (!loc || loc === 'Location' || loc === 'Last Updated' || loc.includes(':')) return;
+
+        // Clean leading single quotes or ISO strings
+        if (time && typeof time === 'string') {
+          if (time.startsWith("'")) time = time.substring(1);
+          if (time.includes('T')) {
+            time = time.split('T')[1].substring(0, 5);
+          }
+        }
 
         if (!locations[loc]) {
           locations[loc] = [];
         }
 
-        // Limit each location card to 5 upcoming predictions for screen fit
+        // Keep up to 5 events per card
         if (locations[loc].length < 5) {
           locations[loc].push({ time, tide, height });
         }
@@ -177,9 +143,9 @@
           const isHigh = (evt.tide || '').toLowerCase() === 'high';
           return `
             <li class="tide-item">
-              <span class="tide-time">${evt.time}</span>
+              <span class="tide-time">${evt.time || ''}</span>
               <span class="tag ${isHigh ? 'high' : 'low'}">${(evt.tide || '').toUpperCase()}</span>
-              <span class="height">${evt.height}</span>
+              <span class="height">${evt.height || ''}</span>
             </li>`;
         }).join('');
 
@@ -195,15 +161,13 @@
       });
     }
 
-    // Load Live Feed via JSONP script injection
     function loadFeed() {
       const script = document.createElement('script');
       const apiUrl = 'https://script.google.com/macros/s/AKfycbxO1OWtlVb_dt2KiSvlelIYNAyuWMBHDbYRFKCBIgVJR4r0l75EwBFVs-YFIFcM61UI/exec?callback=handleTideData';
-      script.src = apiUrl + '&t=' + new Date().getTime(); // Prevent caching
+      script.src = apiUrl + '&t=' + new Date().getTime();
       document.body.appendChild(script);
     }
 
-    // Initial load and set automatic 15-minute refresh
     loadFeed();
     setInterval(loadFeed, 15 * 60 * 1000);
   </script>
