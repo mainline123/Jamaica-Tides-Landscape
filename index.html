@@ -3,181 +3,168 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jamaica Tides - Landscape Display</title>
+  <title>Jamaica Coastal Tides - Live predictions</title>
   <style>
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
+
     body {
-      width: 100vw;
-      height: 100vh;
-      overflow: hidden;
-      font-family: Arial, Helvetica, sans-serif;
-      background: linear-gradient(135deg, #021827 0%, #075076 100%);
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background-color: #0d3b59;
       color: #ffffff;
+      height: 100vh;
       display: flex;
       flex-direction: column;
-      padding: 2vh 3vw;
+      padding: 20px;
+      overflow: hidden;
     }
+
     header {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      border-bottom: 3px solid #f6c41f;
-      padding-bottom: 1.5vh;
-      margin-bottom: 2vh;
+      align-items: flex-end;
+      border-bottom: 2px solid #f1c40f;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
     }
-    .title-area h1 {
-      font-size: 3.5vh;
-      font-weight: 900;
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 800;
       letter-spacing: 1px;
+      color: #ffffff;
+      text-transform: uppercase;
     }
-    .title-area p {
-      font-size: 1.8vh;
-      color: #f6c41f;
-      font-weight: 700;
-      margin-top: 0.3vh;
+
+    .subtitle {
+      font-size: 0.9rem;
+      color: #f1c40f;
+      font-weight: 600;
     }
-    .last-updated {
-      font-size: 1.6vh;
-      color: #cfd8dc;
-      text-align: right;
+
+    .timestamp {
+      font-size: 0.85rem;
+      color: #bdc3c7;
     }
+
     .grid-container {
       flex: 1;
       display: grid;
       grid-template-columns: repeat(5, 1fr);
-      gap: 1.5vw;
+      gap: 15px;
       align-items: stretch;
+      height: calc(100vh - 100px);
     }
+
     .card {
-      background: rgba(255, 255, 255, 0.95);
-      color: #12394f;
+      background: #ffffff;
+      color: #2c3e50;
       border-radius: 12px;
-      padding: 2vh 1vw;
+      padding: 15px 12px;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
     }
+
     .card-title {
-      font-size: 2.2vh;
-      font-weight: 800;
-      color: #078147;
-      border-bottom: 2px solid #e0e0e0;
-      padding-bottom: 1vh;
-      margin-bottom: 1.5vh;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #1e824c;
       text-align: center;
+      margin-bottom: 15px;
+      border-bottom: 1px solid #ecf0f1;
+      padding-bottom: 8px;
     }
+
     .tide-list {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 1vh;
-      flex: 1;
+      gap: 10px;
+      overflow-y: auto;
     }
+
     .tide-item {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0.8vh 0.5vw;
-      border-bottom: 1px solid #f0f0f0;
-      font-size: 1.5vh;
+      padding: 6px 4px;
+      font-size: 0.9rem;
+      border-bottom: 1px dashed #f0f0f0;
     }
+
     .tide-time {
-      font-weight: 700;
+      font-weight: 600;
+      width: 35%;
     }
+
     .tag {
-      padding: 0.4vh 0.6vw;
+      padding: 3px 8px;
       border-radius: 4px;
-      font-weight: 800;
-      color: #ffffff;
-      font-size: 1.2vh;
-    }
-    .tag.high {
-      background-color: #0077b6;
-    }
-    .tag.low {
-      background-color: #d90429;
-    }
-    .height {
-      color: #555555;
-      font-size: 1.3vh;
-    }
-    .error-msg {
-      grid-column: span 5;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #fff;
       text-align: center;
-      font-size: 2vh;
-      color: #ff6b6b;
-      margin-top: 5vh;
+      width: 30%;
+    }
+
+    .tag.high {
+      background-color: #2980b9;
+    }
+
+    .tag.low {
+      background-color: #c0392b;
+    }
+
+    .height {
+      font-weight: 600;
+      color: #7f8c8d;
+      width: 30%;
+      text-align: right;
     }
   </style>
 </head>
 <body>
 
   <header>
-    <div class="title-area">
-      <h1>JAMAICA COASTAL TIDES</h1>
-      <p>LIVE DAILY PREDICTIONS</p>
+    <div>
+      <h1>Jamaica Coastal Tides</h1>
+      <div class="subtitle">LIVE DAILY PREDICTIONS</div>
     </div>
-    <div class="last-updated" id="updated-time">
-      Loading live feed...
-    </div>
+    <div class="timestamp" id="updated-time">Updating...</div>
   </header>
 
   <main class="grid-container" id="tide-grid">
-    <!-- Dynamic Tide Cards Output Here -->
+    <!-- 5 Coastal Location Cards Render Here -->
   </main>
 
   <script>
-    const APPS_SCRIPT_BASE_URL = 'https://script.google.com/macros/s/AKfycbxO1OWtlVb_dt2KiSvlelIYNAyuWMBHDbYRFKCBIgVJR4r0l75EwBFVs-YFIFcM61UI/exec?feed=1&callback=handleTideData';
-
-    // JSONP Callback Function
+    // JSONP Callback handler
     function handleTideData(data) {
-      if (!data || !data.rows) {
-        document.getElementById('tide-grid').innerHTML = `
-          <div class="error-msg">
-            No tide data received. Please run refreshJamaicaTidesScraper in Apps Script.
-          </div>`;
-        return;
+      if (data.updated) {
+        document.getElementById('updated-time').innerText = 'Updated: ' + data.updated;
       }
 
-      document.getElementById('updated-time').innerText = `Updated: ${data.updated || 'Just now'}`;
-      renderGrid(data.rows);
-    }
-
-    function loadTideFeedJSONP() {
-      // Remove any existing dynamic script tag
-      const oldScript = document.getElementById('jsonp-tide-script');
-      if (oldScript) {
-        oldScript.remove();
-      }
-
-      // Inject new script tag to fetch fresh payload
-      const script = document.createElement('script');
-      script.id = 'jsonp-tide-script';
-      script.src = `${APPS_SCRIPT_BASE_URL}&_ts=${Date.now()}`;
-      script.onerror = function() {
-        document.getElementById('tide-grid').innerHTML = `
-          <div class="error-msg">
-            Unable to connect to live Apps Script feed.
-          </div>`;
-      };
-      document.body.appendChild(script);
-    }
-
-    function renderGrid(rows) {
       const locations = {};
 
-      rows.forEach(row => {
-        const [loc, date, time, tide, height] = row;
+      (data.rows || []).forEach(row => {
+        let [loc, date, time, tide, height] = row;
         if (!loc) return;
+
+        // Strip single quotes or ISO formatting if present
+        if (time && time.startsWith("'")) time = time.substring(1);
 
         if (!locations[loc]) {
           locations[loc] = [];
         }
-        locations[loc].push({ time, tide, height });
+
+        // Limit each location card to 5 upcoming predictions for screen fit
+        if (locations[loc].length < 5) {
+          locations[loc].push({ time, tide, height });
+        }
       });
 
       const gridContainer = document.getElementById('tide-grid');
@@ -186,7 +173,7 @@
       Object.keys(locations).forEach(locName => {
         const events = locations[locName];
         
-        let itemsHtml = events.map(evt => {
+        const itemsHtml = events.map(evt => {
           const isHigh = (evt.tide || '').toLowerCase() === 'high';
           return `
             <li class="tide-item">
@@ -208,11 +195,17 @@
       });
     }
 
-    // Load feed immediately on launch
-    loadTideFeedJSONP();
+    // Load Live Feed via JSONP script injection
+    function loadFeed() {
+      const script = document.createElement('script');
+      const apiUrl = 'https://script.google.com/macros/s/AKfycbxO1OWtlVb_dt2KiSvlelIYNAyuWMBHDbYRFKCBIgVJR4r0l75EwBFVs-YFIFcM61UI/exec?callback=handleTideData';
+      script.src = apiUrl + '&t=' + new Date().getTime(); // Prevent caching
+      document.body.appendChild(script);
+    }
 
-    // Refresh every 30 minutes
-    setInterval(loadTideFeedJSONP, 30 * 60 * 1000);
+    // Initial load and set automatic 15-minute refresh
+    loadFeed();
+    setInterval(loadFeed, 15 * 60 * 1000);
   </script>
 </body>
 </html>
