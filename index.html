@@ -18,7 +18,7 @@
       height: 100vh;
       display: flex;
       flex-direction: column;
-      padding: 20px;
+      padding: 12px 20px;
       overflow: hidden;
     }
 
@@ -27,12 +27,12 @@
       justify-content: space-between;
       align-items: flex-end;
       border-bottom: 2px solid #f1c40f;
-      padding-bottom: 10px;
-      margin-bottom: 20px;
+      padding-bottom: 6px;
+      margin-bottom: 10px;
     }
 
     h1 {
-      font-size: 2rem;
+      font-size: 1.5rem;
       font-weight: 800;
       letter-spacing: 1px;
       color: #ffffff;
@@ -40,51 +40,50 @@
     }
 
     .subtitle {
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       color: #f1c40f;
       font-weight: 600;
       letter-spacing: 0.5px;
     }
 
     .timestamp {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: #bdc3c7;
     }
 
     .grid-container {
-      flex: 1;
+      height: 48vh;
       display: grid;
       grid-template-columns: repeat(5, 1fr);
-      gap: 15px;
+      gap: 10px;
       align-items: stretch;
-      height: calc(100vh - 100px);
     }
 
     .card {
       background: #ffffff;
       color: #2c3e50;
-      border-radius: 12px;
-      padding: 15px 12px;
+      border-radius: 8px;
+      padding: 8px 8px;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.25);
     }
 
     .card-title {
-      font-size: 1.2rem;
+      font-size: 1rem;
       font-weight: 700;
       color: #1e824c;
       text-align: center;
-      margin-bottom: 12px;
+      margin-bottom: 6px;
       border-bottom: 1px solid #ecf0f1;
-      padding-bottom: 8px;
+      padding-bottom: 4px;
     }
 
     .tide-list {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 4px;
       overflow-y: auto;
     }
 
@@ -92,8 +91,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 6px 2px;
-      font-size: 0.85rem;
+      padding: 3px 2px;
+      font-size: 0.75rem;
       border-bottom: 1px dashed #f0f0f0;
     }
 
@@ -103,9 +102,9 @@
     }
 
     .tag {
-      padding: 3px 6px;
-      border-radius: 4px;
-      font-size: 0.75rem;
+      padding: 2px 4px;
+      border-radius: 3px;
+      font-size: 0.65rem;
       font-weight: 700;
       color: #fff;
       text-align: center;
@@ -131,8 +130,8 @@
       grid-column: span 5;
       color: #e74c3c;
       text-align: center;
-      font-size: 1.2rem;
-      margin-top: 50px;
+      font-size: 1rem;
+      margin-top: 20px;
     }
   </style>
 </head>
@@ -152,8 +151,6 @@
 
   <script>
     function handleTideData(data) {
-      console.log("Payload received:", data);
-      
       const gridContainer = document.getElementById('tide-grid');
       
       if (!data) {
@@ -187,17 +184,15 @@
         let tide = row[3] ? String(row[3]).trim() : '';
         let height = row[4] ? String(row[4]).trim() : '';
 
-        // Filter out headers or non-location metadata
         if (!loc || loc === 'Location' || loc === 'Last Updated' || loc.includes(':')) return;
 
-        // Strip explicit string escape quotes if present
         if (time.startsWith("'")) time = time.substring(1);
 
         if (!locations[loc]) {
           locations[loc] = [];
         }
 
-        if (locations[loc].length < 5) {
+        if (locations[loc].length < 4) {
           locations[loc].push({ time, tide, height });
         }
       });
@@ -245,13 +240,12 @@
       script.src = apiUrl + '&nocache=' + new Date().getTime();
       
       script.onerror = function() {
-        document.getElementById('tide-grid').innerHTML = '<div class="error-msg">Error connecting to endpoint. Verify Web App permissions.</div>';
+        document.getElementById('tide-grid').innerHTML = '<div class="error-msg">Error connecting to endpoint.</div>';
       };
 
       document.body.appendChild(script);
     }
 
-    // Run on initial load and auto-refresh every 15 minutes
     window.onload = loadFeed;
     setInterval(loadFeed, 15 * 60 * 1000);
   </script>
