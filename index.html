@@ -1,852 +1,1157 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Jamaica Coastal Tides & Weather</title>
+<title>Jamaica Coastal Tides & Weather</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<style>
 
-    html, body {
-      width: 100%;
-      height: 100%;
-    }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-    body {
-      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      background-color: #0d3b59;
-      color: #ffffff;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      padding: 12px 20px;
-      overflow: hidden;
-    }
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
 
-    /* =========================
-       HEADER
-       ========================= */
+body {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background: #0d3b59;
+    color: white;
 
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      border-bottom: 4px solid #f1c40f;
-      padding-bottom: 7px;
-      margin-bottom: 10px;
-      flex-shrink: 0;
-    }
+    height: 100vh;
 
-    h1 {
-      font-size: 30px;
-      font-weight: 900;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-    }
+    display: grid;
 
-    .subtitle {
-      font-size: 14px;
-      color: #f1c40f;
-      font-weight: 800;
-      letter-spacing: 1.2px;
-    }
+    /* HEADER / TIDES / WEATHER */
+    grid-template-rows: 9% 60% 31%;
 
-    .timestamp {
-      font-size: 14px;
-      color: #ecf0f1;
-      font-weight: 700;
-    }
+    padding: 10px 18px;
+}
 
-    /* =========================
-       TIDE AREA
-       ========================= */
 
-    .grid-container {
-      flex: 1;
-      min-height: 0;
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 11px;
-      align-items: stretch;
-      margin-bottom: 11px;
-    }
+/* =====================================================
+   HEADER
+===================================================== */
 
-    .card {
-      background: #ffffff;
-      color: #2c3e50;
-      border-radius: 11px;
-      padding: 8px 9px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.35);
-    }
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-    .card-title {
-      font-size: 20px;
-      font-weight: 900;
-      color: #116530;
-      text-align: center;
-      margin-bottom: 4px;
-      border-bottom: 3px solid #bdc3c7;
-      padding-bottom: 5px;
-      text-transform: uppercase;
-    }
+    border-bottom: 4px solid #f1c40f;
 
-    .tide-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-evenly;
-      height: 100%;
-    }
+    padding: 0 2px 6px 2px;
+}
 
-    .tide-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 4px 3px;
-      font-size: 17px;
-      border-bottom: 2px dashed #dfe4ea;
-    }
+h1 {
+    font-size: 28px;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
 
-    .tide-item:last-child {
-      border-bottom: none;
-    }
+.subtitle {
+    font-size: 13px;
+    color: #f1c40f;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+}
 
-    .tide-time {
-      font-weight: 800;
-      width: 38%;
-      color: #1e272e;
-    }
+.timestamp {
+    font-size: 13px;
+    font-weight: 700;
+}
 
-    .tag {
-      padding: 5px 6px;
-      border-radius: 6px;
-      font-size: 14px;
-      font-weight: 900;
-      color: #ffffff;
-      text-align: center;
-      width: 30%;
-    }
 
-    .tag.high {
-      background-color: #2980b9;
-    }
+/* =====================================================
+   TIDES
+===================================================== */
 
-    .tag.low {
-      background-color: #c0392b;
-    }
+.grid-container {
 
-    .height {
-      font-weight: 800;
-      color: #2f3640;
-      width: 32%;
-      text-align: right;
-    }
+    display: grid;
 
-    .error-msg,
-    .loading-msg {
-      grid-column: span 5;
-      text-align: center;
-      font-size: 20px;
-      margin-top: 30px;
-      font-weight: bold;
-    }
+    grid-template-columns: repeat(5, 1fr);
 
-    .error-msg {
-      color: #ff7675;
-    }
+    gap: 10px;
 
-    /* =========================
-       LARGER WEATHER BAR
-       ========================= */
+    padding-top: 9px;
+    padding-bottom: 9px;
 
-    .weather-bar {
-      height: 215px;
-      flex-shrink: 0;
-      background: #ffffff;
-      color: #17324d;
-      border-radius: 12px;
-      border-top: 5px solid #f1c40f;
-      display: flex;
-      align-items: stretch;
-      overflow: hidden;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.35);
-    }
+    min-height: 0;
+}
 
-    /* CURRENT WEATHER */
 
-    .current-weather {
-      width: 35%;
-      display: flex;
-      align-items: center;
-      padding: 14px 20px;
-      border-right: 2px solid #dfe6e9;
-    }
+.card {
 
-    .weather-icon {
-      width: 90px;
-      height: 90px;
-      object-fit: contain;
-      margin-right: 15px;
-    }
+    background: white;
 
-    .current-details {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
+    color: #2c3e50;
 
-    .weather-location {
-      font-size: 21px;
-      font-weight: 900;
-      color: #116530;
-      text-transform: uppercase;
-    }
+    border-radius: 10px;
 
-    .current-main {
-      display: flex;
-      align-items: baseline;
-      gap: 12px;
-      margin-top: 3px;
-    }
+    padding: 7px 8px;
 
-    .temperature {
-      font-size: 50px;
-      line-height: 1;
-      font-weight: 900;
-      color: #0d3b59;
-    }
+    display: flex;
 
-    .condition {
-      font-size: 18px;
-      font-weight: 800;
-      color: #34495e;
-    }
+    flex-direction: column;
 
-    .weather-details {
-      font-size: 16px;
-      font-weight: 700;
-      color: #596b78;
-      margin-top: 8px;
-      line-height: 1.5;
-    }
+    overflow: hidden;
 
-    /* FORECAST */
+    box-shadow: 0 5px 14px rgba(0,0,0,.35);
+}
 
-    .forecast-container {
-      width: 65%;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-    }
 
-    .forecast-day {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      border-right: 2px solid #dfe6e9;
-      padding: 8px 10px;
-    }
+.card-title {
 
-    .forecast-day:last-child {
-      border-right: none;
-    }
+    font-size: 19px;
 
-    .forecast-name {
-      font-size: 20px;
-      font-weight: 900;
-      color: #116530;
-      text-transform: uppercase;
-    }
+    font-weight: 900;
 
-    .forecast-icon {
-      width: 66px;
-      height: 66px;
-      object-fit: contain;
-    }
+    color: #116530;
 
-    .forecast-condition {
-      font-size: 15px;
-      font-weight: 700;
-      color: #566573;
-      text-align: center;
-      min-height: 20px;
-    }
+    text-align: center;
 
-    .forecast-temp {
-      font-size: 22px;
-      font-weight: 900;
-      color: #0d3b59;
-      margin-top: 4px;
-    }
+    border-bottom: 3px solid #bdc3c7;
 
-    .forecast-rain {
-      font-size: 14px;
-      color: #2980b9;
-      font-weight: 800;
-      margin-top: 3px;
-    }
+    padding-bottom: 5px;
 
-    .weather-loading,
-    .weather-error {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 20px;
-      font-weight: 800;
-    }
+    text-transform: uppercase;
 
-    .weather-error {
-      color: #c0392b;
-    }
+    flex-shrink: 0;
+}
 
-  </style>
+
+.tide-list {
+
+    list-style: none;
+
+    flex: 1;
+
+    display: grid;
+
+    grid-template-rows: repeat(4, 1fr);
+
+    min-height: 0;
+}
+
+
+.tide-item {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    font-size: 16px;
+
+    border-bottom: 1px dashed #dfe4ea;
+
+    min-height: 0;
+}
+
+
+.tide-item:last-child {
+    border-bottom: none;
+}
+
+
+.tide-time {
+
+    font-weight: 800;
+
+    width: 38%;
+
+    color: #1e272e;
+}
+
+
+.tag {
+
+    padding: 4px 5px;
+
+    border-radius: 5px;
+
+    font-size: 13px;
+
+    font-weight: 900;
+
+    color: white;
+
+    text-align: center;
+
+    width: 29%;
+}
+
+
+.tag.high {
+    background: #2980b9;
+}
+
+
+.tag.low {
+    background: #c0392b;
+}
+
+
+.height {
+
+    font-weight: 800;
+
+    color: #2f3640;
+
+    width: 33%;
+
+    text-align: right;
+}
+
+
+.loading-msg,
+.error-msg {
+
+    grid-column: 1 / -1;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 20px;
+
+    font-weight: bold;
+}
+
+
+.error-msg {
+    color: #ff7675;
+}
+
+
+/* =====================================================
+   WEATHER
+===================================================== */
+
+.weather-bar {
+
+    background: white;
+
+    color: #17324d;
+
+    border-radius: 11px;
+
+    border-top: 5px solid #f1c40f;
+
+    display: flex;
+
+    overflow: hidden;
+
+    min-height: 0;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,.35);
+}
+
+
+/* CURRENT WEATHER */
+
+.current-weather {
+
+    width: 35%;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 10px 18px;
+
+    border-right: 2px solid #dfe6e9;
+}
+
+
+.weather-icon {
+
+    width: 82px;
+
+    height: 82px;
+
+    object-fit: contain;
+
+    margin-right: 13px;
+}
+
+
+.current-details {
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+}
+
+
+.weather-location {
+
+    font-size: 20px;
+
+    font-weight: 900;
+
+    color: #116530;
+
+    text-transform: uppercase;
+}
+
+
+.current-main {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+
+.temperature {
+
+    font-size: 46px;
+
+    line-height: 1;
+
+    font-weight: 900;
+
+    color: #0d3b59;
+}
+
+
+.condition {
+
+    font-size: 17px;
+
+    font-weight: 800;
+
+    color: #34495e;
+}
+
+
+.weather-details {
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    color: #596b78;
+
+    margin-top: 6px;
+
+    line-height: 1.35;
+}
+
+
+/* FORECAST */
+
+.forecast-container {
+
+    width: 65%;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    min-height: 0;
+}
+
+
+.forecast-day {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-right: 2px solid #dfe6e9;
+
+    padding: 5px;
+}
+
+
+.forecast-day:last-child {
+    border-right: none;
+}
+
+
+.forecast-name {
+
+    font-size: 19px;
+
+    font-weight: 900;
+
+    color: #116530;
+
+    text-transform: uppercase;
+}
+
+
+.forecast-icon {
+
+    width: 55px;
+
+    height: 55px;
+
+    object-fit: contain;
+}
+
+
+.forecast-condition {
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    color: #566573;
+
+    text-align: center;
+}
+
+
+.forecast-temp {
+
+    font-size: 20px;
+
+    font-weight: 900;
+
+    color: #0d3b59;
+
+    margin-top: 2px;
+}
+
+
+.forecast-rain {
+
+    font-size: 12px;
+
+    color: #2980b9;
+
+    font-weight: 800;
+
+    margin-top: 2px;
+}
+
+
+.weather-loading,
+.weather-error {
+
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 20px;
+
+    font-weight: 800;
+}
+
+
+.weather-error {
+    color: #c0392b;
+}
+
+</style>
 </head>
+
 
 <body>
 
-  <!-- HEADER -->
 
-  <header>
+<!-- =====================================================
+     HEADER
+===================================================== -->
 
-    <div>
-      <h1>Jamaica Coastal Tides</h1>
-      <div class="subtitle">
-        LIVE DAILY PREDICTIONS
-      </div>
-    </div>
+<header>
 
-    <div class="timestamp" id="updated-time">
-      Updating...
-    </div>
+<div>
 
-  </header>
+<h1>Jamaica Coastal Tides</h1>
 
+<div class="subtitle">
+LIVE DAILY PREDICTIONS
+</div>
 
-  <!-- TIDES -->
-
-  <main class="grid-container" id="tide-grid">
-
-    <div class="loading-msg">
-      Loading live tide predictions...
-    </div>
-
-  </main>
+</div>
 
 
-  <!-- WEATHER -->
+<div
+class="timestamp"
+id="updated-time">
 
-  <section class="weather-bar" id="weather-bar">
+Updating...
 
-    <div class="weather-loading">
-      Loading Montego Bay weather...
-    </div>
+</div>
 
-  </section>
+</header>
+
+
+
+<!-- =====================================================
+     TIDES
+===================================================== -->
+
+<main
+class="grid-container"
+id="tide-grid">
+
+<div class="loading-msg">
+Loading live tide predictions...
+</div>
+
+</main>
+
+
+
+<!-- =====================================================
+     WEATHER
+===================================================== -->
+
+<section
+class="weather-bar"
+id="weather-bar">
+
+<div class="weather-loading">
+Loading Montego Bay weather...
+</div>
+
+</section>
+
 
 
 <script>
 
+
 /* =====================================================
-   TIDE DATA
-   ===================================================== */
+   TIDES
+===================================================== */
+
 
 function handleTideData(data) {
 
-  const gridContainer =
-    document.getElementById('tide-grid');
 
-  if (!data) {
+const gridContainer =
+document.getElementById('tide-grid');
 
-    gridContainer.innerHTML =
-      '<div class="error-msg">Failed to load tide data.</div>';
 
-    return;
-  }
+if (!data) {
 
+gridContainer.innerHTML =
+'<div class="error-msg">Failed to load tide data.</div>';
 
-  if (data.updated) {
-
-    document.getElementById('updated-time').innerText =
-      'Updated: ' + data.updated;
-
-  }
-
-
-  let rows = [];
-
-
-  if (Array.isArray(data.rows)) {
-
-    rows = data.rows;
-
-  } else if (Array.isArray(data)) {
-
-    rows = data;
-
-  }
-
-
-  if (rows.length === 0) {
-
-    gridContainer.innerHTML =
-      '<div class="error-msg">No tide predictions currently available.</div>';
-
-    return;
-  }
-
-
-  const locations = {};
-
-
-  rows.forEach(row => {
-
-    if (!Array.isArray(row) || row.length < 3) {
-      return;
-    }
-
-
-    let loc =
-      String(row[0]).trim();
-
-    let time =
-      String(row[2]).trim();
-
-    let tide =
-      row[3]
-      ? String(row[3]).trim()
-      : '';
-
-    let height =
-      row[4]
-      ? String(row[4]).trim()
-      : '';
-
-
-    if (
-      !loc ||
-      loc === 'Location' ||
-      loc === 'Last Updated' ||
-      loc.includes(':')
-    ) {
-
-      return;
-    }
-
-
-    if (time.startsWith("'")) {
-
-      time =
-        time.substring(1);
-
-    }
-
-
-    if (!locations[loc]) {
-
-      locations[loc] = [];
-
-    }
-
-
-    if (locations[loc].length < 4) {
-
-      locations[loc].push({
-
-        time,
-        tide,
-        height
-
-      });
-
-    }
-
-  });
-
-
-  gridContainer.innerHTML = '';
-
-
-  const locKeys =
-    Object.keys(locations);
-
-
-  if (locKeys.length === 0) {
-
-    gridContainer.innerHTML =
-      '<div class="error-msg">Parsing error: No valid locations found.</div>';
-
-    return;
-  }
-
-
-  locKeys.forEach(locName => {
-
-    const events =
-      locations[locName];
-
-
-    const itemsHtml =
-      events.map(evt => {
-
-
-        const isHigh =
-          evt.tide
-          .toLowerCase()
-          .includes('high');
-
-
-        return `
-
-          <li class="tide-item">
-
-            <span class="tide-time">
-              ${evt.time}
-            </span>
-
-            <span class="tag ${isHigh ? 'high' : 'low'}">
-              ${evt.tide.toUpperCase() || 'TIDE'}
-            </span>
-
-            <span class="height">
-              ${evt.height}
-            </span>
-
-          </li>
-
-        `;
-
-      }).join('');
-
-
-    const cardHtml = `
-
-      <div class="card">
-
-        <div class="card-title">
-          ${locName}
-        </div>
-
-        <ul class="tide-list">
-          ${itemsHtml}
-        </ul>
-
-      </div>
-
-    `;
-
-
-    gridContainer.innerHTML +=
-      cardHtml;
-
-  });
+return;
 
 }
+
+
+if (data.updated) {
+
+document.getElementById('updated-time').innerText =
+'Updated: ' + data.updated;
+
+}
+
+
+let rows = [];
+
+
+if (Array.isArray(data.rows)) {
+
+rows = data.rows;
+
+}
+
+else if (Array.isArray(data)) {
+
+rows = data;
+
+}
+
+
+if (rows.length === 0) {
+
+gridContainer.innerHTML =
+'<div class="error-msg">No tide predictions currently available.</div>';
+
+return;
+
+}
+
+
+const locations = {};
+
+
+rows.forEach(row => {
+
+
+if (!Array.isArray(row) || row.length < 3) {
+return;
+}
+
+
+let loc =
+String(row[0]).trim();
+
+
+let time =
+String(row[2]).trim();
+
+
+let tide =
+row[3]
+? String(row[3]).trim()
+: '';
+
+
+let height =
+row[4]
+? String(row[4]).trim()
+: '';
+
+
+
+if (
+
+!loc ||
+
+loc === 'Location' ||
+
+loc === 'Last Updated' ||
+
+loc.includes(':')
+
+) {
+
+return;
+
+}
+
+
+if (time.startsWith("'")) {
+
+time =
+time.substring(1);
+
+}
+
+
+if (!locations[loc]) {
+
+locations[loc] = [];
+
+}
+
+
+if (locations[loc].length < 4) {
+
+locations[loc].push({
+
+time,
+tide,
+height
+
+});
+
+}
+
+});
+
+
+gridContainer.innerHTML = '';
+
+
+const locKeys =
+Object.keys(locations);
+
+
+if (locKeys.length === 0) {
+
+gridContainer.innerHTML =
+'<div class="error-msg">Parsing error: No valid locations found.</div>';
+
+return;
+
+}
+
+
+locKeys.forEach(locName => {
+
+
+const events =
+locations[locName];
+
+
+const itemsHtml =
+events.map(evt => {
+
+
+const isHigh =
+evt.tide
+.toLowerCase()
+.includes('high');
+
+
+return `
+
+<li class="tide-item">
+
+<span class="tide-time">
+${evt.time}
+</span>
+
+<span class="tag ${isHigh ? 'high' : 'low'}">
+${evt.tide.toUpperCase() || 'TIDE'}
+</span>
+
+<span class="height">
+${evt.height}
+</span>
+
+</li>
+
+`;
+
+}).join('');
+
+
+gridContainer.innerHTML += `
+
+<div class="card">
+
+<div class="card-title">
+${locName}
+</div>
+
+<ul class="tide-list">
+${itemsHtml}
+</ul>
+
+</div>
+
+`;
+
+});
+
+}
+
 
 
 /* =====================================================
    LOAD TIDE FEED
-   ===================================================== */
+===================================================== */
+
 
 function loadFeed() {
 
-  const oldScript =
-    document.getElementById('jsonp-feed');
+
+const oldScript =
+document.getElementById('jsonp-feed');
 
 
-  if (oldScript) {
+if (oldScript) {
 
-    oldScript.remove();
-
-  }
-
-
-  const script =
-    document.createElement('script');
-
-
-  script.id =
-    'jsonp-feed';
-
-
-  const apiUrl =
-    'https://script.google.com/macros/s/AKfycbxEgTDAaaNsudZ-qe3WBW0wQF9_Tu__xv0FlRHrhmLXv8sknEjnnle3-V0txI_9ySis/exec?callback=handleTideData';
-
-
-  script.src =
-    apiUrl +
-    '&nocache=' +
-    new Date().getTime();
-
-
-  script.onerror = function() {
-
-    document.getElementById('tide-grid').innerHTML =
-      '<div class="error-msg">Error connecting to tide endpoint.</div>';
-
-  };
-
-
-  document.body.appendChild(script);
+oldScript.remove();
 
 }
 
 
-/* =====================================================
-   WEATHERAPI - MONTEGO BAY
-   ===================================================== */
+const script =
+document.createElement('script');
 
-const WEATHER_API_KEY =
-  'd2645e9bf1574405be941312262010';
 
+script.id =
+'jsonp-feed';
 
-async function loadWeather() {
 
-  const weatherBar =
-    document.getElementById('weather-bar');
+const apiUrl =
+'https://script.google.com/macros/s/AKfycbxEgTDAaaNsudZ-qe3WBW0wQF9_Tu__xv0FlRHrhmLXv8sknEjnnle3-V0txI_9ySis/exec?callback=handleTideData';
 
 
-  try {
+script.src =
+apiUrl +
+'&nocache=' +
+new Date().getTime();
 
-    const url =
-      'https://api.weatherapi.com/v1/forecast.json' +
-      '?key=' +
-      encodeURIComponent(WEATHER_API_KEY) +
-      '&q=Montego%20Bay%2C%20Jamaica' +
-      '&days=3' +
-      '&aqi=no' +
-      '&alerts=no';
 
+script.onerror = function() {
 
-    const response =
-      await fetch(url, {
-        cache: 'no-store'
-      });
 
+document.getElementById('tide-grid').innerHTML =
 
-    if (!response.ok) {
-
-      throw new Error(
-        'Weather API returned ' +
-        response.status
-      );
-
-    }
-
-
-    const data =
-      await response.json();
-
-
-    if (
-      !data.current ||
-      !data.forecast ||
-      !data.forecast.forecastday
-    ) {
-
-      throw new Error(
-        'Invalid weather data'
-      );
-
-    }
-
-
-    const current =
-      data.current;
-
-
-    const forecast =
-      data.forecast.forecastday;
-
-
-    const currentIcon =
-      current.condition.icon.startsWith('//')
-      ? 'https:' + current.condition.icon
-      : current.condition.icon;
-
-
-    const currentHtml = `
-
-      <div class="current-weather">
-
-        <img
-          class="weather-icon"
-          src="${currentIcon}"
-          alt="${current.condition.text}"
-        >
-
-        <div class="current-details">
-
-          <div class="weather-location">
-            Montego Bay Weather
-          </div>
-
-          <div class="current-main">
-
-            <span class="temperature">
-              ${Math.round(current.temp_c)}°C
-            </span>
-
-            <span class="condition">
-              ${current.condition.text}
-            </span>
-
-          </div>
-
-          <div class="weather-details">
-
-            Feels like
-            ${Math.round(current.feelslike_c)}°C
-
-            &nbsp; • &nbsp;
-
-            Humidity
-            ${current.humidity}%
-
-            &nbsp; • &nbsp;
-
-            Wind
-            ${Math.round(current.wind_kph)} km/h
-
-          </div>
-
-        </div>
-
-      </div>
-
-    `;
-
-
-    const forecastHtml =
-      forecast.map((day, index) => {
-
-
-        const date =
-          new Date(
-            day.date + 'T12:00:00'
-          );
-
-
-        const dayName =
-          index === 0
-          ? 'Today'
-          : date.toLocaleDateString(
-              'en-US',
-              {
-                weekday: 'short'
-              }
-            );
-
-
-        const icon =
-          day.day.condition.icon.startsWith('//')
-          ? 'https:' + day.day.condition.icon
-          : day.day.condition.icon;
-
-
-        return `
-
-          <div class="forecast-day">
-
-            <div class="forecast-name">
-              ${dayName}
-            </div>
-
-            <img
-              class="forecast-icon"
-              src="${icon}"
-              alt="${day.day.condition.text}"
-            >
-
-            <div class="forecast-condition">
-              ${day.day.condition.text}
-            </div>
-
-            <div class="forecast-temp">
-              ${Math.round(day.day.maxtemp_c)}°
-              /
-              ${Math.round(day.day.mintemp_c)}°
-            </div>
-
-            <div class="forecast-rain">
-              Rain ${day.day.daily_chance_of_rain}%
-            </div>
-
-          </div>
-
-        `;
-
-      }).join('');
-
-
-    weatherBar.innerHTML =
-
-      currentHtml +
-
-      `<div class="forecast-container">
-        ${forecastHtml}
-      </div>`;
-
-  }
-
-
-  catch (error) {
-
-    console.error(
-      'Weather error:',
-      error
-    );
-
-
-    weatherBar.innerHTML = `
-
-      <div class="weather-error">
-        Montego Bay weather temporarily unavailable
-      </div>
-
-    `;
-
-  }
-
-}
-
-
-/* =====================================================
-   START
-   ===================================================== */
-
-window.onload = function() {
-
-  loadFeed();
-
-  loadWeather();
+'<div class="error-msg">Error connecting to tide endpoint.</div>';
 
 };
 
 
-/* TIDES REFRESH EVERY 15 MINUTES */
+document.body.appendChild(script);
 
-setInterval(
-  loadFeed,
-  15 * 60 * 1000
+}
+
+
+
+/* =====================================================
+   WEATHER
+===================================================== */
+
+
+const WEATHER_API_KEY =
+'d2645e9bf1574405be941312262010';
+
+
+
+async function loadWeather() {
+
+
+const weatherBar =
+document.getElementById('weather-bar');
+
+
+try {
+
+
+const url =
+
+'https://api.weatherapi.com/v1/forecast.json' +
+
+'?key=' +
+encodeURIComponent(WEATHER_API_KEY) +
+
+'&q=Montego%20Bay%2C%20Jamaica' +
+
+'&days=3' +
+
+'&aqi=no' +
+
+'&alerts=no';
+
+
+
+const response =
+await fetch(url, {
+
+cache: 'no-store'
+
+});
+
+
+if (!response.ok) {
+
+throw new Error(
+'Weather API returned ' +
+response.status
+);
+
+}
+
+
+const data =
+await response.json();
+
+
+if (
+
+!data.current ||
+
+!data.forecast ||
+
+!data.forecast.forecastday
+
+) {
+
+throw new Error(
+'Invalid weather data'
+);
+
+}
+
+
+
+const current =
+data.current;
+
+
+const forecast =
+data.forecast.forecastday;
+
+
+
+const currentIcon =
+
+current.condition.icon.startsWith('//')
+
+? 'https:' +
+current.condition.icon
+
+: current.condition.icon;
+
+
+
+const currentHtml = `
+
+
+<div class="current-weather">
+
+
+<img
+
+class="weather-icon"
+
+src="${currentIcon}"
+
+alt="${current.condition.text}">
+
+
+<div class="current-details">
+
+
+<div class="weather-location">
+
+Montego Bay Weather
+
+</div>
+
+
+<div class="current-main">
+
+
+<span class="temperature">
+
+${Math.round(current.temp_c)}°C
+
+</span>
+
+
+<span class="condition">
+
+${current.condition.text}
+
+</span>
+
+
+</div>
+
+
+<div class="weather-details">
+
+
+Feels like
+${Math.round(current.feelslike_c)}°C
+
+&nbsp; • &nbsp;
+
+Humidity
+${current.humidity}%
+
+&nbsp; • &nbsp;
+
+Wind
+${Math.round(current.wind_kph)} km/h
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+`;
+
+
+
+const forecastHtml =
+
+forecast.map((day, index) => {
+
+
+const date =
+new Date(
+day.date +
+'T12:00:00'
 );
 
 
-/* WEATHER REFRESH EVERY 20 MINUTES */
+const dayName =
+
+index === 0
+
+? 'Today'
+
+: date.toLocaleDateString(
+
+'en-US',
+
+{
+weekday: 'short'
+}
+
+);
+
+
+const icon =
+
+day.day.condition.icon.startsWith('//')
+
+? 'https:' +
+day.day.condition.icon
+
+: day.day.condition.icon;
+
+
+
+return `
+
+
+<div class="forecast-day">
+
+
+<div class="forecast-name">
+
+${dayName}
+
+</div>
+
+
+<img
+
+class="forecast-icon"
+
+src="${icon}"
+
+alt="${day.day.condition.text}">
+
+
+<div class="forecast-condition">
+
+${day.day.condition.text}
+
+</div>
+
+
+<div class="forecast-temp">
+
+${Math.round(day.day.maxtemp_c)}°
+/
+${Math.round(day.day.mintemp_c)}°
+
+</div>
+
+
+<div class="forecast-rain">
+
+Rain ${day.day.daily_chance_of_rain}%
+
+</div>
+
+
+</div>
+
+`;
+
+
+}).join('');
+
+
+
+weatherBar.innerHTML =
+
+currentHtml +
+
+`
+
+<div class="forecast-container">
+
+${forecastHtml}
+
+</div>
+
+`;
+
+}
+
+
+catch (error) {
+
+
+console.error(
+'Weather error:',
+error
+);
+
+
+weatherBar.innerHTML = `
+
+<div class="weather-error">
+
+Montego Bay weather temporarily unavailable
+
+</div>
+
+`;
+
+}
+
+}
+
+
+
+/* =====================================================
+   START
+===================================================== */
+
+
+window.onload = function() {
+
+loadFeed();
+
+loadWeather();
+
+};
+
+
+
+/* Refresh tides every 15 minutes */
 
 setInterval(
-  loadWeather,
-  20 * 60 * 1000
+
+loadFeed,
+
+15 * 60 * 1000
+
 );
+
+
+
+/* Refresh weather every 20 minutes */
+
+setInterval(
+
+loadWeather,
+
+20 * 60 * 1000
+
+);
+
 
 </script>
 
