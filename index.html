@@ -15,13 +15,16 @@
     html, body {
       width: 100%;
       height: 100%;
+      background-color: #0d3b59;
     }
 
     body {
       font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      background-color: #0d3b59;
       color: #ffffff;
-      height: 100vh;
+
+      /* HTML ONLY USES TOP 80% OF NOVISIGN SCREEN */
+      height: 80vh;
+
       display: flex;
       flex-direction: column;
       padding: 14px 22px;
@@ -35,6 +38,7 @@
       border-bottom: 4px solid #f1c40f;
       padding-bottom: 8px;
       margin-bottom: 14px;
+      flex-shrink: 0;
     }
 
     h1 {
@@ -59,11 +63,12 @@
     }
 
     .grid-container {
-      height: 47vh;
+      flex: 1;
       display: grid;
       grid-template-columns: repeat(5, 1fr);
       gap: 12px;
       align-items: stretch;
+      min-height: 0;
     }
 
     .card {
@@ -266,19 +271,13 @@
 
           return `
             <li class="tide-item">
-
-              <span class="tide-time">
-                ${evt.time}
-              </span>
+              <span class="tide-time">${evt.time}</span>
 
               <span class="tag ${isHigh ? 'high' : 'low'}">
                 ${evt.tide.toUpperCase() || 'TIDE'}
               </span>
 
-              <span class="height">
-                ${evt.height}
-              </span>
-
+              <span class="height">${evt.height}</span>
             </li>
           `;
 
@@ -339,7 +338,7 @@
 
     window.onload = loadFeed;
 
-    /* Refresh tide information every 15 minutes */
+    /* Refresh live tide data every 15 minutes */
     setInterval(loadFeed, 15 * 60 * 1000);
 
   </script>
