@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jamaica Tide Center</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+body {
+  background: linear-gradient(135deg, #071521, #0b2637);
+  color: white;
+  font-family: "Segoe UI", Arial, sans-serif;
+  padding: 18px 26px;
+}
+
+.screen {
+  height: 100%;
+  display: grid;
+  grid-template-rows: 15% 1fr 7%;
+  gap: 14px;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid rgba(255,255,255,.18);
+}
+
+.title h1 {
+  margin: 0;
+  font-size: 46px;
+  letter-spacing: 2px;
+  color: #f7c948;
+}
+
+.title p {
+  margin: 5px 0 0;
+  font-size: 20px;
+  color: #b9d7e8;
+  letter-spacing: 1px;
+}
+
+.jamaica {
+  font-size: 25px;
+  font-weight: 700;
+  text-align: right;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 16px;
+  min-height: 0;
+}
+
+.location {
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: 15px;
+  padding: 16px 20px;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+.location-name {
+  font-size: 27px;
+  font-weight: 800;
+  text-align: center;
+  color: #ffffff;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255,255,255,.15);
+}
+
+.tides {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  align-items: center;
+}
+
+.tide {
+  text-align: center;
+}
+
+.type {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.high .type {
+  color: #57e389;
+}
+
+.low .type {
+  color: #ff7272;
+}
+
+.time {
+  font-size: 31px;
+  font-weight: 800;
+  margin: 7px 0 3px;
+}
+
+.height {
+  font-size: 18px;
+  color: #d5e6ef;
+}
+
+.arrow {
+  font-size: 22px;
+  margin-right: 5px;
+}
+
+.status {
+  color: #9db4c2;
+  font-size: 18px;
+  text-align: center;
+  align-self: center;
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #8fa9b8;
+  font-size: 15px;
+  border-top: 1px solid rgba(255,255,255,.13);
+  padding-top: 7px;
+}
+
+.error {
+  color: #ffd166;
+}
+</style>
+</head>
+
+<body>
+
+<div class="screen">
+
+<header>
+  <div class="title">
+    <h1>JAMAICA TIDE CENTER</h1>
+    <p>DAILY COASTAL TIDE PREDICTIONS</p>
+  </div>
+
+  <div class="jamaica">
+    🇯🇲 JAMAICA
+  </div>
+</header>
+
+<div class="grid" id="tideGrid"></div>
+
+<footer>
+  <div>Predicted astronomical tides • Local Jamaica time</div>
+  <div id="updated">Loading tide predictions...</div>
+</footer>
+
+</div>
+
+<script>
+
+const locations = [
+  "Montego Bay",
+  "Falmouth",
+  "Ocho Rios",
+  "Negril",
+  "Kingston",
+  "Port Antonio"
+];
+
+function emptyCard(name) {
+  return `
+    <div class="location">
+      <div class="location-name">${name}</div>
+
+      <div class="tides">
+
+        <div class="tide high">
+          <div class="type">
+            <span class="arrow">▲</span>HIGH
+          </div>
+          <div class="time">--:--</div>
+          <div class="height">-- ft</div>
+        </div>
+
+        <div class="tide low">
+          <div class="type">
+            <span class="arrow">▼</span>LOW
+          </div>
+          <div class="time">--:--</div>
+          <div class="height">-- ft</div>
+        </div>
+
+      </div>
+    </div>
+  `;
+}
+
+function drawEmptyGrid() {
+  document.getElementById("tideGrid").innerHTML =
+    locations.map(emptyCard).join("");
+}
+
+function drawTides(data) {
+
+  const html = locations.map(name => {
+
+    const place = data.locations?.find(
+      item => item.name === name
+    );
+
+    if (!place) {
+      return emptyCard(name);
+    }
+
+    return `
+      <div class="location">
+
+        <div class="location-name">
+          ${name}
+        </div>
+
+        <div class="tides">
+
+          <div class="tide high">
+            <div class="type">
+              <span class="arrow">▲</span>HIGH
+            </div>
+
+            <div class="time">
+              ${place.high?.time || "--:--"}
+            </div>
+
+            <div class="height">
+              ${place.high?.height || "--"} ft
+            </div>
+          </div>
+
+          <div class="tide low">
+            <div class="type">
+              <span class="arrow">▼</span>LOW
+            </div>
+
+            <div class="time">
+              ${place.low?.time || "--:--"}
+            </div>
+
+            <div class="height">
+              ${place.low?.height || "--"} ft
+            </div>
+          </div>
+
+        </div>
+      </div>
+    `;
+
+  }).join("");
+
+  document.getElementById("tideGrid").innerHTML = html;
+
+  if (data.updated) {
+    document.getElementById("updated").innerText =
+      "Updated: " + data.updated;
+  } else {
+    document.getElementById("updated").innerText =
+      "Tide predictions loaded";
+  }
+}
+
+async function loadTides() {
+
+  try {
+
+    const response = await fetch(
+      "tide-data.json?t=" + Date.now(),
+      { cache: "no-store" }
+    );
+
+    if (!response.ok) {
+      throw new Error("Tide data unavailable");
+    }
+
+    const data = await response.json();
+
+    drawTides(data);
+
+  } catch (error) {
+
+    console.error(error);
+
+    document.getElementById("updated").innerHTML =
+      '<span class="error">Waiting for tide data...</span>';
+
+  }
+}
+
+drawEmptyGrid();
+loadTides();
+
+setInterval(loadTides, 15 * 60 * 1000);
+
+</script>
+
+</body>
+</html>
