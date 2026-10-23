@@ -1,70 +1,72 @@
 {
-  "updated": "Waiting for automatic tide update",
+  "updated": "Oct 23, 2026, 11:05 AM Jamaica time",
+  "source": "TideCheck / FES2022 / TICON-4",
+  "datum": "LAT",
   "locations": [
     {
       "name": "Montego Bay",
       "high": {
-        "time": "--:--",
-        "height": "--"
+        "time": "08:17 PM",
+        "height": "1.9"
       },
       "low": {
-        "time": "--:--",
-        "height": "--"
+        "time": "02:36 PM",
+        "height": "1.6"
       }
     },
     {
       "name": "Falmouth",
       "high": {
-        "time": "--:--",
-        "height": "--"
+        "time": "06:55 PM",
+        "height": "1.3"
       },
       "low": {
-        "time": "--:--",
-        "height": "--"
+        "time": "01:12 PM",
+        "height": "0.6"
       }
     },
     {
       "name": "Ocho Rios",
       "high": {
-        "time": "--:--",
-        "height": "--"
+        "time": "06:49 PM",
+        "height": "1.3"
       },
       "low": {
-        "time": "--:--",
-        "height": "--"
+        "time": "01:07 PM",
+        "height": "0.6"
       }
     },
     {
       "name": "Negril",
       "high": {
-        "time": "--:--",
-        "height": "--"
+        "time": "07:04 PM",
+        "height": "1.3"
       },
       "low": {
-        "time": "--:--",
-        "height": "--"
+        "time": "01:22 PM",
+        "height": "0.6"
       }
     },
     {
       "name": "Kingston",
       "high": {
-        "time": "--:--",
-        "height": "--"
+        "time": "06:50 PM",
+        "height": "1.0"
       },
       "low": {
-        "time": "--:--",
-        "height": "--"
+        "time": "01:33 PM",
+        "height": "0.8"
       }
     },
     {
       "name": "Port Antonio",
       "high": {
-        "time": "--:--",
-        "height": "--"
+        "time": "06:46 PM",
+        "height": "1.2"
       },
       "low": {
-        "time": "--:--",
-        "height": "--"
+        "time": "01:05 PM",
+        "height": "0.6"
       }
     }
   ]
