@@ -16,6 +16,7 @@ html, body {
     width: 100%;
     height: 100%;
     overflow: hidden;
+    background: #b9d9e7;
 }
 
 body {
@@ -23,16 +24,12 @@ body {
     color: #08345c;
     height: 100vh;
 
-    background:
-        linear-gradient(
-            rgba(0, 105, 155, 0.25),
-            rgba(0, 115, 150, 0.35)
-        ),
-        url("Jamaican Turquoise Coastline Paradise.png");
-
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background: linear-gradient(
+        180deg,
+        #b9d9e7 0%,
+        #9ed0df 55%,
+        #83c5d7 100%
+    );
 
     display: grid;
     grid-template-rows: 13% 60% 27%;
@@ -49,7 +46,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 3px solid rgba(255,255,255,.7);
+    border-bottom: 3px solid rgba(255,255,255,.8);
     padding: 0 8px 7px;
 }
 
@@ -64,7 +61,7 @@ header {
     font-weight: 900;
     letter-spacing: 2px;
     color: white;
-    text-shadow: 0 2px 5px rgba(0,0,0,.4);
+    text-shadow: 0 2px 5px rgba(0,0,0,.25);
 }
 
 .tide-word {
@@ -72,7 +69,7 @@ header {
     font-weight: 900;
     letter-spacing: 1px;
     color: #f7c948;
-    text-shadow: 0 2px 5px rgba(0,0,0,.4);
+    text-shadow: 0 2px 5px rgba(0,0,0,.22);
 }
 
 .subtitle {
@@ -81,13 +78,13 @@ header {
     font-weight: 700;
     letter-spacing: 1.5px;
     margin-top: 2px;
-    text-shadow: 0 1px 3px rgba(0,0,0,.5);
+    text-shadow: 0 1px 3px rgba(0,0,0,.25);
 }
 
 .header-right {
     text-align: right;
     color: white;
-    text-shadow: 0 1px 4px rgba(0,0,0,.5);
+    text-shadow: 0 1px 3px rgba(0,0,0,.25);
 }
 
 .country {
@@ -124,19 +121,21 @@ header {
     background:
         linear-gradient(
             180deg,
-            rgba(26,110,165,.92) 0%,
-            rgba(34,126,178,.88) 25%,
-            rgba(235,249,253,.94) 65%,
-            rgba(248,253,255,.97) 100%
+            rgba(26,110,165,.96) 0%,
+            rgba(34,126,178,.92) 25%,
+            rgba(235,249,253,.98) 65%,
+            rgba(248,253,255,1) 100%
         );
 
-    border: 3px solid rgba(105,220,244,.9);
+    border: 3px solid rgba(65,193,220,.9);
     border-radius: 17px;
     overflow: hidden;
-    box-shadow: 0 5px 14px rgba(0,0,0,.25);
+
+    box-shadow: 0 4px 10px rgba(0,0,0,.16);
 
     display: grid;
     grid-template-rows: 29% 71%;
+
     min-height: 0;
 }
 
@@ -153,11 +152,11 @@ header {
     background:
         linear-gradient(
             180deg,
-            rgba(24,105,164,.95),
-            rgba(24,93,150,.95)
+            #2478ad,
+            #17649b
         );
 
-    text-shadow: 0 2px 4px rgba(0,0,0,.35);
+    text-shadow: 0 2px 3px rgba(0,0,0,.25);
 }
 
 
@@ -175,10 +174,13 @@ header {
 .tides::after {
     content: "";
     position: absolute;
+
     left: 50%;
     top: 20%;
     bottom: 12%;
+
     width: 1px;
+
     background: rgba(18,112,170,.45);
 }
 
@@ -222,23 +224,29 @@ header {
     background:
         linear-gradient(
             180deg,
-            rgba(255,255,255,.97),
-            rgba(233,247,252,.97)
+            #ffffff,
+            #edf8fc
         );
 
-    border: 2px solid rgba(105,220,244,.85);
+    border: 2px solid rgba(65,193,220,.85);
     border-radius: 17px;
     overflow: hidden;
+
     display: flex;
+
     min-height: 0;
-    box-shadow: 0 5px 14px rgba(0,0,0,.25);
+
+    box-shadow: 0 4px 10px rgba(0,0,0,.15);
 }
 
 .current-weather {
     width: 35%;
+
     display: flex;
     align-items: center;
+
     padding: 8px 17px;
+
     border-right: 1px solid #9dc9dc;
 }
 
@@ -295,8 +303,10 @@ header {
 
 .forecast-container {
     width: 65%;
+
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+
     min-height: 0;
 }
 
@@ -305,7 +315,9 @@ header {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
     border-right: 1px solid #9dc9dc;
+
     padding: 3px;
 }
 
@@ -350,9 +362,11 @@ header {
 .loading,
 .error {
     width: 100%;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     font-size: 20px;
     font-weight: 800;
 }
@@ -366,13 +380,21 @@ header {
 
 <body>
 
+
 <header>
 
 <div>
 
     <div class="header-title">
-        <span class="jamaica-word">JAMAICA</span>
-        <span class="tide-word">TIDE CENTER</span>
+
+        <span class="jamaica-word">
+            JAMAICA
+        </span>
+
+        <span class="tide-word">
+            TIDE CENTER
+        </span>
+
     </div>
 
     <div class="subtitle">
@@ -397,6 +419,7 @@ header {
 </header>
 
 
+
 <main class="tide-grid" id="tide-grid">
 
     <div class="loading">
@@ -406,6 +429,7 @@ header {
 </main>
 
 
+
 <section class="weather-bar" id="weather-bar">
 
     <div class="loading">
@@ -413,6 +437,7 @@ header {
     </div>
 
 </section>
+
 
 
 <script>
@@ -511,7 +536,9 @@ async function loadTides() {
 
 
         if (!response.ok) {
-            throw new Error("Tide data unavailable");
+            throw new Error(
+                "Tide data unavailable"
+            );
         }
 
 
@@ -520,7 +547,9 @@ async function loadTides() {
 
 
         const grid =
-            document.getElementById("tide-grid");
+            document.getElementById(
+                "tide-grid"
+            );
 
 
         grid.innerHTML =
@@ -528,7 +557,8 @@ async function loadTides() {
 
                 const location =
                     data.locations?.find(
-                        item => item.name === name
+                        item =>
+                            item.name === name
                     );
 
                 return buildCard(
@@ -544,15 +574,18 @@ async function loadTides() {
             document.getElementById(
                 "updated-time"
             ).innerText =
-                "Updated: " + data.updated;
+                "Updated: " +
+                data.updated;
 
         }
 
     }
 
+
     catch (error) {
 
         console.error(error);
+
 
         document.getElementById(
             "tide-grid"
@@ -562,6 +595,7 @@ async function loadTides() {
     }
 
 }
+
 
 
 /* =====================================================
@@ -575,18 +609,28 @@ const WEATHER_API_KEY =
 async function loadWeather() {
 
     const weatherBar =
-        document.getElementById("weather-bar");
+        document.getElementById(
+            "weather-bar"
+        );
 
 
     try {
 
         const url =
+
             "https://api.weatherapi.com/v1/forecast.json" +
+
             "?key=" +
-            encodeURIComponent(WEATHER_API_KEY) +
+            encodeURIComponent(
+                WEATHER_API_KEY
+            ) +
+
             "&q=Montego%20Bay%2C%20Jamaica" +
+
             "&days=3" +
+
             "&aqi=no" +
+
             "&alerts=no";
 
 
@@ -600,7 +644,11 @@ async function loadWeather() {
 
 
         if (!response.ok) {
-            throw new Error("Weather unavailable");
+
+            throw new Error(
+                "Weather unavailable"
+            );
+
         }
 
 
@@ -611,13 +659,18 @@ async function loadWeather() {
         const current =
             data.current;
 
+
         const forecast =
             data.forecast.forecastday;
 
 
         const currentIcon =
+
             current.condition.icon.startsWith("//")
-            ? "https:" + current.condition.icon
+
+            ? "https:" +
+              current.condition.icon
+
             : current.condition.icon;
 
 
@@ -639,11 +692,17 @@ async function loadWeather() {
                     <div class="current-main">
 
                         <span class="temperature">
-                            ${Math.round(current.temp_c)}°C
+
+                            ${Math.round(
+                                current.temp_c
+                            )}°C
+
                         </span>
 
                         <span class="condition">
+
                             ${current.condition.text}
+
                         </span>
 
                     </div>
@@ -651,7 +710,9 @@ async function loadWeather() {
                     <div class="weather-details">
 
                         Feels like
-                        ${Math.round(current.feelslike_c)}°C
+                        ${Math.round(
+                            current.feelslike_c
+                        )}°C
 
                         &nbsp; | &nbsp;
 
@@ -661,7 +722,9 @@ async function loadWeather() {
                         &nbsp; | &nbsp;
 
                         Wind
-                        ${Math.round(current.wind_kph)} km/h
+                        ${Math.round(
+                            current.wind_kph
+                        )} km/h
 
                     </div>
 
@@ -673,89 +736,115 @@ async function loadWeather() {
 
 
         const forecastHtml =
-            forecast.map((day, index) => {
 
-                const date =
-                    new Date(
-                        day.date + "T12:00:00"
-                    );
+            forecast.map(
+                (day, index) => {
 
 
-                const dayName =
-                    index === 0
-                    ? "Today"
-                    : date.toLocaleDateString(
-                        "en-US",
-                        {
-                            weekday: "short"
-                        }
-                    );
+                    const date =
+                        new Date(
+                            day.date +
+                            "T12:00:00"
+                        );
 
 
-                const icon =
-                    day.day.condition.icon.startsWith("//")
-                    ? "https:" + day.day.condition.icon
-                    : day.day.condition.icon;
+                    const dayName =
+
+                        index === 0
+
+                        ? "Today"
+
+                        : date.toLocaleDateString(
+
+                            "en-US",
+
+                            {
+                                weekday:
+                                    "short"
+                            }
+
+                        );
 
 
-                return `
+                    const icon =
 
-                    <div class="forecast-day">
+                        day.day.condition.icon.startsWith("//")
 
-                        <div class="forecast-name">
-                            ${dayName}
+                        ? "https:" +
+                          day.day.condition.icon
+
+                        : day.day.condition.icon;
+
+
+                    return `
+
+                        <div class="forecast-day">
+
+                            <div class="forecast-name">
+                                ${dayName}
+                            </div>
+
+                            <img
+                                class="forecast-icon"
+                                src="${icon}"
+                                alt="">
+
+                            <div class="forecast-condition">
+                                ${day.day.condition.text}
+                            </div>
+
+                            <div class="forecast-temp">
+
+                                ${Math.round(
+                                    day.day.maxtemp_c
+                                )}°
+                                /
+                                ${Math.round(
+                                    day.day.mintemp_c
+                                )}°
+
+                            </div>
+
+                            <div class="forecast-rain">
+
+                                Rain
+                                ${day.day.daily_chance_of_rain}%
+
+                            </div>
+
                         </div>
 
-                        <img
-                            class="forecast-icon"
-                            src="${icon}"
-                            alt="">
+                    `;
 
-                        <div class="forecast-condition">
-                            ${day.day.condition.text}
-                        </div>
+                }
 
-                        <div class="forecast-temp">
-
-                            ${Math.round(
-                                day.day.maxtemp_c
-                            )}°
-                            /
-                            ${Math.round(
-                                day.day.mintemp_c
-                            )}°
-
-                        </div>
-
-                        <div class="forecast-rain">
-
-                            Rain
-                            ${day.day.daily_chance_of_rain}%
-
-                        </div>
-
-                    </div>
-
-                `;
-
-            }).join("");
+            ).join("");
 
 
         weatherBar.innerHTML =
+
             currentHtml +
+
             `
+
                 <div class="forecast-container">
+
                     ${forecastHtml}
+
                 </div>
+
             `;
 
     }
+
 
     catch (error) {
 
         console.error(error);
 
+
         weatherBar.innerHTML =
+
             '<div class="error">Montego Bay weather temporarily unavailable</div>';
 
     }
@@ -763,13 +852,17 @@ async function loadWeather() {
 }
 
 
+
 /* =====================================================
    START
 ===================================================== */
 
 window.onload = function() {
+
     loadTides();
+
     loadWeather();
+
 };
 
 
