@@ -1,0 +1,71 @@
+{
+  "updated": "Waiting for automatic tide update",
+  "locations": [
+    {
+      "name": "Montego Bay",
+      "high": {
+        "time": "--:--",
+        "height": "--"
+      },
+      "low": {
+        "time": "--:--",
+        "height": "--"
+      }
+    },
+    {
+      "name": "Falmouth",
+      "high": {
+        "time": "--:--",
+        "height": "--"
+      },
+      "low": {
+        "time": "--:--",
+        "height": "--"
+      }
+    },
+    {
+      "name": "Ocho Rios",
+      "high": {
+        "time": "--:--",
+        "height": "--"
+      },
+      "low": {
+        "time": "--:--",
+        "height": "--"
+      }
+    },
+    {
+      "name": "Negril",
+      "high": {
+        "time": "--:--",
+        "height": "--"
+      },
+      "low": {
+        "time": "--:--",
+        "height": "--"
+      }
+    },
+    {
+      "name": "Kingston",
+      "high": {
+        "time": "--:--",
+        "height": "--"
+      },
+      "low": {
+        "time": "--:--",
+        "height": "--"
+      }
+    },
+    {
+      "name": "Port Antonio",
+      "high": {
+        "time": "--:--",
+        "height": "--"
+      },
+      "low": {
+        "time": "--:--",
+        "height": "--"
+      }
+    }
+  ]
+}
