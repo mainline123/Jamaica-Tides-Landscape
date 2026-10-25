@@ -1,13 +1,13 @@
 {
-  "updated": "Oct 25, 2026, 8:33 AM Jamaica time",
+  "updated": "Oct 25, 2026, 12:23 PM Jamaica time",
   "source": "TideCheck / FES2022 / TICON-4",
   "datum": "LAT",
   "locations": [
     {
       "name": "Montego Bay",
       "high": {
-        "time": "10:48 AM",
-        "height": "2.2"
+        "time": "08:15 PM",
+        "height": "2.0"
       },
       "low": {
         "time": "04:08 PM",
@@ -39,8 +39,8 @@
     {
       "name": "Negril",
       "high": {
-        "time": "08:42 AM",
-        "height": "1.5"
+        "time": "08:08 PM",
+        "height": "1.2"
       },
       "low": {
         "time": "02:50 PM",
@@ -50,8 +50,8 @@
     {
       "name": "Kingston",
       "high": {
-        "time": "08:59 AM",
-        "height": "1.3"
+        "time": "07:36 PM",
+        "height": "0.8"
       },
       "low": {
         "time": "04:04 PM",
