@@ -1,5 +1,5 @@
 {
-  "updated": "Oct 25, 2026, 3:37 AM Jamaica time",
+  "updated": "Oct 25, 2026, 8:33 AM Jamaica time",
   "source": "TideCheck / FES2022 / TICON-4",
   "datum": "LAT",
   "locations": [
@@ -17,8 +17,8 @@
     {
       "name": "Falmouth",
       "high": {
-        "time": "08:31 AM",
-        "height": "1.5"
+        "time": "08:03 PM",
+        "height": "1.2"
       },
       "low": {
         "time": "02:43 PM",
@@ -28,8 +28,8 @@
     {
       "name": "Ocho Rios",
       "high": {
-        "time": "08:25 AM",
-        "height": "1.5"
+        "time": "07:58 PM",
+        "height": "1.2"
       },
       "low": {
         "time": "02:40 PM",
@@ -61,8 +61,8 @@
     {
       "name": "Port Antonio",
       "high": {
-        "time": "08:22 AM",
-        "height": "1.5"
+        "time": "07:55 PM",
+        "height": "1.1"
       },
       "low": {
         "time": "02:40 PM",
