@@ -1,5 +1,5 @@
 {
-  "updated": "Oct 28, 2026, 11:11 AM Jamaica time",
+  "updated": "Oct 28, 2026, 4:14 PM Jamaica time",
   "source": "TideCheck / FES2022 / TICON-4",
   "datum": "LAT",
   "locations": [
@@ -39,8 +39,8 @@
     {
       "name": "Negril",
       "high": {
-        "time": "11:13 AM",
-        "height": "1.4"
+        "time": "10:23 PM",
+        "height": "1.0"
       },
       "low": {
         "time": "05:37 PM",
