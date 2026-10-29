@@ -1,5 +1,5 @@
 {
-  "updated": "Oct 29, 2026, 2:27 AM Jamaica time",
+  "updated": "Oct 29, 2026, 9:35 AM Jamaica time",
   "source": "TideCheck / FES2022 / TICON-4",
   "datum": "LAT",
   "locations": [
@@ -21,8 +21,8 @@
         "height": "1.4"
       },
       "low": {
-        "time": "04:39 AM",
-        "height": "0.2"
+        "time": "06:38 PM",
+        "height": "0.6"
       }
     },
     {
@@ -32,8 +32,8 @@
         "height": "1.4"
       },
       "low": {
-        "time": "04:27 AM",
-        "height": "0.2"
+        "time": "06:37 PM",
+        "height": "0.6"
       }
     },
     {
@@ -43,8 +43,8 @@
         "height": "1.4"
       },
       "low": {
-        "time": "04:56 AM",
-        "height": "0.2"
+        "time": "06:52 PM",
+        "height": "0.7"
       }
     },
     {
@@ -65,8 +65,8 @@
         "height": "1.4"
       },
       "low": {
-        "time": "04:17 AM",
-        "height": "0.2"
+        "time": "06:43 PM",
+        "height": "0.6"
       }
     }
   ]
