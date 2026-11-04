@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Negril Weather & Tides</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #b9d9e7;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: #08345c;
+    height: 100vh;
+
+    background: linear-gradient(
+        180deg,
+        #b9d9e7 0%,
+        #9ed0df 55%,
+        #83c5d7 100%
+    );
+
+    display: grid;
+    grid-template-rows: 13% 60% 27%;
+
+    padding: 10px 18px 12px;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid rgba(255,255,255,.8);
+    padding: 0 8px 7px;
+}
+
+.header-title {
+    display: flex;
+    align-items: baseline;
+    gap: 13px;
+}
+
+.jamaica-word {
+    font-size: 39px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    color: white;
+    text-shadow: 0 2px 5px rgba(0,0,0,.25);
+}
+
+.tide-word {
+    font-size: 39px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    color: #f7c948;
+    text-shadow: 0 2px 5px rgba(0,0,0,.22);
+}
+
+.subtitle {
+    color: white;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    margin-top: 2px;
+    text-shadow: 0 1px 3px rgba(0,0,0,.25);
+}
+
+.header-right {
+    text-align: right;
+    color: white;
+    text-shadow: 0 1px 3px rgba(0,0,0,.25);
+}
+
+.country {
+    font-size: 21px;
+    font-weight: 900;
+}
+
+.timestamp {
+    font-size: 12px;
+    margin-top: 5px;
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   TIDE GRID
+===================================================== */
+
+.tide-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: 1fr;
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+    gap: 10px;
+    padding: 9px 3px;
+    min-height: 0;
+}
+
+
+/* =====================================================
+   TIDE CARDS
+===================================================== */
+
+.card {
+    background:
+        linear-gradient(
+            180deg,
+            rgba(26,110,165,.96) 0%,
+            rgba(34,126,178,.92) 25%,
+            rgba(235,249,253,.98) 65%,
+            rgba(248,253,255,1) 100%
+        );
+
+    border: 3px solid rgba(65,193,220,.9);
+    border-radius: 17px;
+    overflow: hidden;
+
+    box-shadow: 0 4px 10px rgba(0,0,0,.16);
+
+    display: grid;
+    grid-template-rows: 29% 71%;
+
+    min-height: 0;
+}
+
+.card-title {
+    color: white;
+    font-size: 34px;
+    font-weight: 900;
+    text-align: center;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background:
+        linear-gradient(
+            180deg,
+            #2478ad,
+            #17649b
+        );
+
+    text-shadow: 0 2px 3px rgba(0,0,0,.25);
+}
+
+
+/* =====================================================
+   HIGH / LOW
+===================================================== */
+
+.tides {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    position: relative;
+}
+
+.tides::after {
+    content: "";
+    position: absolute;
+
+    left: 50%;
+    top: 20%;
+    bottom: 12%;
+
+    width: 1px;
+
+    background: rgba(18,112,170,.45);
+}
+
+.tide {
+    text-align: center;
+}
+
+.tide-type {
+    font-size: 24px;
+    font-weight: 900;
+}
+
+.high .tide-type {
+    color: #079447;
+}
+
+.low .tide-type {
+    color: #e05a63;
+}
+
+.tide-time {
+    color: #082e5d;
+    font-size: 44px;
+    font-weight: 900;
+    margin-top: 6px;
+}
+
+.tide-height {
+    color: #173e68;
+    font-size: 22px;
+    font-weight: 700;
+    margin-top: 3px;
+}
+
+
+/* =====================================================
+   WEATHER
+===================================================== */
+
+.weather-bar {
+    background:
+        linear-gradient(
+            180deg,
+            #ffffff,
+            #edf8fc
+        );
+
+    border: 2px solid rgba(65,193,220,.85);
+    border-radius: 17px;
+    overflow: hidden;
+
+    display: flex;
+
+    min-height: 0;
+
+    box-shadow: 0 4px 10px rgba(0,0,0,.15);
+}
+
+.current-weather {
+    width: 35%;
+
+    display: flex;
+    align-items: center;
+
+    padding: 8px 17px;
+
+    border-right: 1px solid #9dc9dc;
+}
+
+.weather-icon {
+    width: 78px;
+    height: 78px;
+    object-fit: contain;
+    margin-right: 12px;
+}
+
+.current-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.weather-location {
+    font-size: 18px;
+    font-weight: 900;
+    color: #075286;
+    text-transform: uppercase;
+}
+
+.current-main {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.temperature {
+    font-size: 43px;
+    line-height: 1;
+    font-weight: 900;
+    color: #073b6d;
+}
+
+.condition {
+    font-size: 14px;
+    font-weight: 800;
+    color: #254d70;
+}
+
+.weather-details {
+    font-size: 12px;
+    font-weight: 700;
+    color: #37607e;
+    margin-top: 5px;
+}
+
+
+/* =====================================================
+   FORECAST
+===================================================== */
+
+.forecast-container {
+    width: 65%;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    min-height: 0;
+}
+
+.forecast-day {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    border-right: 1px solid #9dc9dc;
+
+    padding: 3px;
+}
+
+.forecast-day:last-child {
+    border-right: none;
+}
+
+.forecast-name {
+    font-size: 17px;
+    font-weight: 900;
+    color: #075286;
+    text-transform: uppercase;
+}
+
+.forecast-icon {
+    width: 47px;
+    height: 47px;
+    object-fit: contain;
+}
+
+.forecast-condition {
+    font-size: 11px;
+    font-weight: 700;
+    color: #345c78;
+    text-align: center;
+}
+
+.forecast-temp {
+    font-size: 19px;
+    font-weight: 900;
+    color: #073b6d;
+    margin-top: 1px;
+}
+
+.forecast-rain {
+    font-size: 11px;
+    color: #087ac1;
+    font-weight: 900;
+    margin-top: 1px;
+}
+
+.loading,
+.error {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.error {
+    color: #c0392b;
+}
+</style>
+</head>
+
+
+<body>
+
+
+<header>
+
+<div>
+
+    <div class="header-title">
+
+        <span class="jamaica-word">
+            NEGRIL
+        </span>
+
+        <span class="tide-word">
+            WEATHER & TIDES
+        </span>
+
+    </div>
+
+    <div class="subtitle">
+        SEVEN MILE BEACH • NEGRIL, JAMAICA
+    </div>
+
+</div>
+
+
+<div class="header-right">
+
+    <div class="country">
+        🇯🇲 JAMAICA
+    </div>
+
+    <div class="timestamp" id="updated-time">
+        Loading tide predictions...
+    </div>
+
+</div>
+
+</header>
+
+
+
+<main class="tide-grid" id="tide-grid">
+
+    <div class="loading">
+        Loading Negril tide predictions...
+    </div>
+
+</main>
+
+
+
+<section class="weather-bar" id="weather-bar">
+
+    <div class="loading">
+        Loading Negril weather...
+    </div>
+
+</section>
+
+
+
+<script>
+
+/* =====================================================
+   TIDES
+===================================================== */
+
+const tideLocations = ["Negril"];
+
+
+function buildCard(name, location) {
+
+    const highTime =
+        location?.high?.time || "--:--";
+
+    const highHeight =
+        location?.high?.height || "--";
+
+    const lowTime =
+        location?.low?.time || "--:--";
+
+    const lowHeight =
+        location?.low?.height || "--";
+
+
+    return `
+
+        <div class="card">
+
+            <div class="card-title">
+                ${name}
+            </div>
+
+            <div class="tides">
+
+                <div class="tide high">
+
+                    <div class="tide-type">
+                        ▲ HIGH
+                    </div>
+
+                    <div class="tide-time">
+                        ${highTime}
+                    </div>
+
+                    <div class="tide-height">
+                        ${highHeight} ft
+                    </div>
+
+                </div>
+
+
+                <div class="tide low">
+
+                    <div class="tide-type">
+                        ▼ LOW
+                    </div>
+
+                    <div class="tide-time">
+                        ${lowTime}
+                    </div>
+
+                    <div class="tide-height">
+                        ${lowHeight} ft
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    `;
+}
+
+
+async function loadTides() {
+
+    try {
+
+        const response =
+            await fetch(
+                "tide-data.json?t=" + Date.now(),
+                {
+                    cache: "no-store"
+                }
+            );
+
+
+        if (!response.ok) {
+            throw new Error(
+                "Tide data unavailable"
+            );
+        }
+
+
+        const data =
+            await response.json();
+
+
+        const grid =
+            document.getElementById(
+                "tide-grid"
+            );
+
+
+        grid.innerHTML =
+            tideLocations.map(name => {
+
+                const location =
+                    data.locations?.find(
+                        item =>
+                            item.name === name
+                    );
+
+                return buildCard(
+                    name,
+                    location
+                );
+
+            }).join("");
+
+
+        if (data.updated) {
+
+            document.getElementById(
+                "updated-time"
+            ).innerText =
+                "Updated: " +
+                data.updated;
+
+        }
+
+    }
+
+
+    catch (error) {
+
+        console.error(error);
+
+
+        document.getElementById(
+            "tide-grid"
+        ).innerHTML =
+            '<div class="error">Tide predictions temporarily unavailable</div>';
+
+    }
+
+}
+
+
+
+/* =====================================================
+   WEATHER
+===================================================== */
+
+const WEATHER_API_KEY =
+    "d2645e9bf1574405be941312262010";
+
+
+async function loadWeather() {
+
+    const weatherBar =
+        document.getElementById(
+            "weather-bar"
+        );
+
+
+    try {
+
+        const url =
+
+            "https://api.weatherapi.com/v1/forecast.json" +
+
+            "?key=" +
+            encodeURIComponent(
+                WEATHER_API_KEY
+            ) +
+
+            "&q=Negril%2C%20Jamaica" +
+
+            "&days=3" +
+
+            "&aqi=no" +
+
+            "&alerts=no";
+
+
+        const response =
+            await fetch(
+                url,
+                {
+                    cache: "no-store"
+                }
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Weather unavailable"
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        const current =
+            data.current;
+
+
+        const forecast =
+            data.forecast.forecastday;
+
+
+        const currentIcon =
+
+            current.condition.icon.startsWith("//")
+
+            ? "https:" +
+              current.condition.icon
+
+            : current.condition.icon;
+
+
+        const currentHtml = `
+
+            <div class="current-weather">
+
+                <img
+                    class="weather-icon"
+                    src="${currentIcon}"
+                    alt="">
+
+                <div class="current-details">
+
+                    <div class="weather-location">
+                        Negril Weather
+                    </div>
+
+                    <div class="current-main">
+
+                        <span class="temperature">
+
+                            ${Math.round(
+                                current.temp_c
+                            )}°C
+
+                        </span>
+
+                        <span class="condition">
+
+                            ${current.condition.text}
+
+                        </span>
+
+                    </div>
+
+                    <div class="weather-details">
+
+                        Feels like
+                        ${Math.round(
+                            current.feelslike_c
+                        )}°C
+
+                        &nbsp; | &nbsp;
+
+                        Humidity
+                        ${current.humidity}%
+
+                        &nbsp; | &nbsp;
+
+                        Wind
+                        ${Math.round(
+                            current.wind_kph
+                        )} km/h
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        `;
+
+
+        const forecastHtml =
+
+            forecast.map(
+                (day, index) => {
+
+
+                    const date =
+                        new Date(
+                            day.date +
+                            "T12:00:00"
+                        );
+
+
+                    const dayName =
+
+                        index === 0
+
+                        ? "Today"
+
+                        : date.toLocaleDateString(
+
+                            "en-US",
+
+                            {
+                                weekday:
+                                    "short"
+                            }
+
+                        );
+
+
+                    const icon =
+
+                        day.day.condition.icon.startsWith("//")
+
+                        ? "https:" +
+                          day.day.condition.icon
+
+                        : day.day.condition.icon;
+
+
+                    return `
+
+                        <div class="forecast-day">
+
+                            <div class="forecast-name">
+                                ${dayName}
+                            </div>
+
+                            <img
+                                class="forecast-icon"
+                                src="${icon}"
+                                alt="">
+
+                            <div class="forecast-condition">
+                                ${day.day.condition.text}
+                            </div>
+
+                            <div class="forecast-temp">
+
+                                ${Math.round(
+                                    day.day.maxtemp_c
+                                )}°
+                                /
+                                ${Math.round(
+                                    day.day.mintemp_c
+                                )}°
+
+                            </div>
+
+                            <div class="forecast-rain">
+
+                                Rain
+                                ${day.day.daily_chance_of_rain}%
+
+                            </div>
+
+                        </div>
+
+                    `;
+
+                }
+
+            ).join("");
+
+
+        weatherBar.innerHTML =
+
+            currentHtml +
+
+            `
+
+                <div class="forecast-container">
+
+                    ${forecastHtml}
+
+                </div>
+
+            `;
+
+    }
+
+
+    catch (error) {
+
+        console.error(error);
+
+
+        weatherBar.innerHTML =
+
+            '<div class="error">Negril weather temporarily unavailable</div>';
+
+    }
+
+}
+
+
+
+/* =====================================================
+   START
+===================================================== */
+
+window.onload = function() {
+
+    loadTides();
+
+    loadWeather();
+
+};
+
+
+/* Refresh tides every 15 minutes */
+
+setInterval(
+    loadTides,
+    15 * 60 * 1000
+);
+
+
+/* Refresh weather every 20 minutes */
+
+setInterval(
+    loadWeather,
+    20 * 60 * 1000
+);
+
+</script>
+
+</body>
+</html>
