@@ -1,5 +1,5 @@
 {
-  "updated": "Nov 11, 2026, 12:40 PM Jamaica time",
+  "updated": "Nov 11, 2026, 6:59 PM Jamaica time",
   "source": "TideCheck / FES2022 / TICON-4",
   "datum": "LAT",
   "locations": [
@@ -21,7 +21,7 @@
         "height": "0.8"
       },
       "low": {
-        "time": "05:16 PM",
+        "time": "08:00 PM",
         "height": "0.7"
       }
     },
@@ -32,7 +32,7 @@
         "height": "0.8"
       },
       "low": {
-        "time": "05:15 PM",
+        "time": "07:56 PM",
         "height": "0.6"
       }
     },
@@ -43,15 +43,15 @@
         "height": "0.8"
       },
       "low": {
-        "time": "05:31 PM",
+        "time": "07:23 PM",
         "height": "0.7"
       }
     },
     {
       "name": "Kingston",
       "high": {
-        "time": "12:59 PM",
-        "height": "1.0"
+        "time": "11:09 AM",
+        "height": "1.1"
       },
       "low": {
         "time": "01:02 AM",
@@ -65,7 +65,7 @@
         "height": "0.7"
       },
       "low": {
-        "time": "05:23 PM",
+        "time": "07:06 PM",
         "height": "0.6"
       }
     }
