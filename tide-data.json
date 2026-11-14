@@ -1,72 +1,72 @@
 {
-  "updated": "Nov 13, 2026, 10:27 PM Jamaica time",
+  "updated": "Nov 14, 2026, 5:48 AM Jamaica time",
   "source": "TideCheck / FES2022 / TICON-4",
   "datum": "LAT",
   "locations": [
     {
       "name": "Montego Bay",
       "high": {
-        "time": "06:55 PM",
-        "height": "2.1"
+        "time": "06:53 PM",
+        "height": "2.0"
       },
       "low": {
-        "time": "06:27 AM",
-        "height": "0.9"
+        "time": "07:16 AM",
+        "height": "1.0"
       }
     },
     {
       "name": "Falmouth",
       "high": {
-        "time": "11:03 PM",
-        "height": "0.8"
+        "time": "12:49 PM",
+        "height": "1.2"
       },
       "low": {
-        "time": "10:54 PM",
-        "height": "0.5"
+        "time": "08:00 PM",
+        "height": "0.7"
       }
     },
     {
       "name": "Ocho Rios",
       "high": {
-        "time": "10:54 PM",
-        "height": "0.7"
+        "time": "12:37 PM",
+        "height": "1.2"
       },
       "low": {
-        "time": "10:47 PM",
-        "height": "0.5"
+        "time": "07:56 PM",
+        "height": "0.6"
       }
     },
     {
       "name": "Negril",
       "high": {
-        "time": "11:06 PM",
-        "height": "0.8"
+        "time": "01:14 PM",
+        "height": "1.2"
       },
       "low": {
-        "time": "10:36 PM",
-        "height": "0.6"
+        "time": "08:26 PM",
+        "height": "0.7"
       }
     },
     {
       "name": "Kingston",
       "high": {
-        "time": "12:59 PM",
+        "time": "02:07 PM",
         "height": "1.0"
       },
       "low": {
-        "time": "01:26 AM",
-        "height": "0.3"
+        "time": "09:46 AM",
+        "height": "0.7"
       }
     },
     {
       "name": "Port Antonio",
       "high": {
-        "time": "10:46 PM",
-        "height": "0.7"
+        "time": "12:31 PM",
+        "height": "1.2"
       },
       "low": {
-        "time": "10:45 PM",
-        "height": "0.5"
+        "time": "08:05 PM",
+        "height": "0.6"
       }
     }
   ]
