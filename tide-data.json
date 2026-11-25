@@ -1,13 +1,13 @@
 {
-  "updated": "Nov 24, 2026, 1:05 PM Jamaica time",
+  "updated": "Nov 24, 2026, 9:41 PM Jamaica time",
   "source": "TideCheck / FES2022 / TICON-4",
   "datum": "LAT",
   "locations": [
     {
       "name": "Montego Bay",
       "high": {
-        "time": "01:42 PM",
-        "height": "2.1"
+        "time": "11:53 AM",
+        "height": "2.2"
       },
       "low": {
         "time": "11:15 PM",
@@ -17,34 +17,34 @@
     {
       "name": "Falmouth",
       "high": {
-        "time": "08:27 PM",
-        "height": "1.0"
+        "time": "10:21 PM",
+        "height": "0.9"
       },
       "low": {
-        "time": "03:33 PM",
+        "time": "10:25 PM",
         "height": "0.5"
       }
     },
     {
       "name": "Ocho Rios",
       "high": {
-        "time": "08:22 PM",
-        "height": "1.0"
+        "time": "10:15 PM",
+        "height": "0.9"
       },
       "low": {
-        "time": "03:32 PM",
+        "time": "10:17 PM",
         "height": "0.5"
       }
     },
     {
       "name": "Negril",
       "high": {
-        "time": "08:34 PM",
-        "height": "1.1"
+        "time": "10:29 PM",
+        "height": "1.0"
       },
       "low": {
-        "time": "03:40 PM",
-        "height": "0.6"
+        "time": "09:46 PM",
+        "height": "0.5"
       }
     },
     {
@@ -54,18 +54,18 @@
         "height": "0.4"
       },
       "low": {
-        "time": "09:08 PM",
+        "time": "09:54 PM",
         "height": "0.4"
       }
     },
     {
       "name": "Port Antonio",
       "high": {
-        "time": "08:18 PM",
-        "height": "0.9"
+        "time": "10:11 PM",
+        "height": "0.8"
       },
       "low": {
-        "time": "03:36 PM",
+        "time": "10:15 PM",
         "height": "0.5"
       }
     }
